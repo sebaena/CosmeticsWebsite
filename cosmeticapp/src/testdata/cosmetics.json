@@ -3,7 +3,7 @@
         "_id": "625da774913c95013ab4b432",
         "index": 0,
         "name": "Lumene Nordic Hydra Cream",
-        "picture": "./lumene_nordic_hydra_cream.jpeg",
+        "picture": "pictures/lumene_nordic_hydra_cream.jpeg",
         "ingredients": [
             {
                 "name": "Aqua"
@@ -26,7 +26,7 @@
         "_id": "af25da774913c95013ab4b43",
         "index": 1,
         "name": "Lumene CC cream",
-        "picture": "./lumene_cc_cream.jpeg",
+        "picture": "pictures/lumene_cc_cream.jpeg",
         "ingredients": [
             {
                 "name": "Aqua"
