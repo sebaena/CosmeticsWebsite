@@ -22,12 +22,20 @@ const Cosmetic = (props) => {
 
 function App() {
   const [cosmetic, setCosmetic] = useState(cosmeticsList[0]);
-  console.log(cosmeticsList[0]);
-  console.log(ingredientsList);
+  const [itemIndex, setItemIndex] = useState(0);
 
+  // console.log(cosmeticsList[0]);
+  // console.log(ingredientsList);
+
+  const nextItem = () => {
+    itemIndex == cosmeticsList.length - 1 ? setItemIndex(0) : setItemIndex(itemIndex + 1);
+    setCosmetic(cosmeticsList[itemIndex]);
+  }
+  
   return (
     <div>
       <p>hello cosmetics</p>
+      <button onClick={nextItem}>Next Item</button>
       <Cosmetic cosmetic={cosmetic} />
     </div>
   );
