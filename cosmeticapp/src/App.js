@@ -33,7 +33,6 @@ function App() {
       <label>Search Cosmetic:
         <input type="text" value={searchName} onChange={(event) => handleSearchBoxChange(event)}></input>
       </label>
-      <p>hello cosmetics</p>
       <button onClick={nextItem}>Next Item</button>
       <Cosmetic cosmetic={cosmetic} />
     </div>

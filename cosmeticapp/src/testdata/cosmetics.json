@@ -38,6 +38,23 @@
                 "name": "Glycerin"
             }
         ]
+    },
+    {
+        "_id": "af25da774913c9xxxxxb4b43",
+        "index": 2,
+        "name": "Lumene superpower perfume",
+        "picture": "pictures/lumene_superpower_perfume.jpeg",
+        "ingredients": [
+            {
+                "name": "Aqua"
+            },
+            {
+                "name": "Shea Butter"
+            },
+            {
+                "name": "Propanediol"
+            }
+        ]
     }
 ]
 
