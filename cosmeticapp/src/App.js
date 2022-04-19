@@ -2,7 +2,6 @@ import { useState } from "react";
 import Cosmetic from "./Cosmetic";
 
 var cosmeticsList = require("./testdata/cosmetics.json");
-var ingredientsList = require("./testdata/ingredients.json");
 
 function App() {
   const [cosmetic, setCosmetic] = useState(cosmeticsList[0]);
