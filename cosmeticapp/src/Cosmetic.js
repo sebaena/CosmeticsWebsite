@@ -8,7 +8,7 @@ const Cosmetic = (props) => {
   const [activeIngredient, setActiveIngredient] = useState({});
 
   const searchIngredientFuc = (name) => {
-    const foundIngredientFuc = ingredientsList.find(
+    const foundIngredientFuc = ingredientsList.ingredientsList.find(
       (ingredient) => ingredient.name === name
     );
     foundIngredientFuc

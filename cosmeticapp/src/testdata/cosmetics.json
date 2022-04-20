@@ -1,60 +1,61 @@
-[
+{
+  "cosmeticsList": [
     {
-        "_id": "625da774913c95013ab4b432",
-        "index": 0,
-        "name": "Lumene Nordic Hydra Cream",
-        "picture": "pictures/lumene_nordic_hydra_cream.jpeg",
-        "ingredients": [
-            {
-                "name": "Aqua"
-            },
-            {
-                "name": "Caprylic"
-            },
-            {
-                "name": "Shea Butter"
-            },
-            {
-                "name": "Hydrogenated Polydecene"
-            },
-            {
-                "name": "Propanediol"
-            }
-        ]
+      "_id": "625da774913c95013ab4b432",
+      "index": 0,
+      "name": "Lumene Nordic Hydra Cream",
+      "picture": "pictures/lumene_nordic_hydra_cream.jpeg",
+      "ingredients": [
+        {
+          "name": "Aqua"
+        },
+        {
+          "name": "Caprylic"
+        },
+        {
+          "name": "Shea Butter"
+        },
+        {
+          "name": "Hydrogenated Polydecene"
+        },
+        {
+          "name": "Propanediol"
+        }
+      ]
     },
     {
-        "_id": "af25da774913c95013ab4b43",
-        "index": 1,
-        "name": "Lumene CC cream",
-        "picture": "pictures/lumene_cc_cream.jpeg",
-        "ingredients": [
-            {
-                "name": "Aqua"
-            },
-            {
-                "name": "Diisopropyl"
-            },
-            {
-                "name": "Glycerin"
-            }
-        ]
+      "_id": "af25da774913c95013ab4b43",
+      "index": 1,
+      "name": "Lumene CC cream",
+      "picture": "pictures/lumene_cc_cream.jpeg",
+      "ingredients": [
+        {
+          "name": "Aqua"
+        },
+        {
+          "name": "Diisopropyl"
+        },
+        {
+          "name": "Glycerin"
+        }
+      ]
     },
     {
-        "_id": "af25da774913c9xxxxxb4b43",
-        "index": 2,
-        "name": "Lumene superpower perfume",
-        "picture": "pictures/lumene_superpower_perfume.jpeg",
-        "ingredients": [
-            {
-                "name": "Aqua"
-            },
-            {
-                "name": "Shea Butter"
-            },
-            {
-                "name": "Propanediol"
-            }
-        ]
+      "_id": "af25da774913c9xxxxxb4b43",
+      "index": 2,
+      "name": "Lumene superpower perfume",
+      "picture": "pictures/lumene_superpower_perfume.jpeg",
+      "ingredients": [
+        {
+          "name": "Aqua"
+        },
+        {
+          "name": "Shea Butter"
+        },
+        {
+          "name": "Propanediol"
+        }
+      ]
     }
-]
-
+  ]
+}
