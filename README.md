@@ -11,13 +11,13 @@ We try to build a website for users to easily find the functions of the ingredie
 
 # directory structure
 CosmeticsWebsite/cosmeticapp/public/
-  1. for index.html and manifest.json
+ - for index.html and manifest.json
 CosmeticsWebsite/cosmeticapp/src
-  1. for component and index.js
+ - for component and index.js
 CosmeticsWebsite/cosmeticapp/public/pictures
-  1. for test pictures, temporary files
+ - for test pictures, temporary files
 CosmeticsWebsite/cosmeticapp/src/testdata
-  1. for test data, temporary files
+ - for test data, temporary files
 
 # Released features:
 1. dynamic search cosmetics by name
