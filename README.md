@@ -6,7 +6,8 @@ We try to build a website for users to easily find the functions of the ingredie
 1.  git clone https://github.com/sebaena/CosmeticsWebsite
 2.  cd CosmeticsWebsite/cosmeticapp/
 3.  npm install
-4.  npm start
+4.1 npm start (start frontend)
+4.2 npm server (start server)
 
 # directory structure
 CosmeticsWebsite/cosmeticapp/public/
@@ -21,8 +22,9 @@ CosmeticsWebsite/cosmeticapp/src/testdata
 # Released features:
 1. dynamic search cosmetics by name
 2. click cosmetic ingredient to show its function
+3. fake json-sever added to package.json (start it with 'npm server')
+4. fetch data 'promises' is added in index.js, console.log can see the response
 
 # TODO:
-1. use npx to start json server e.g. npx json-server --port 3001 --watch testdata/cosmetics.json
-2. use axios and promises to fetch data from json-server to frontend (instead of loading data directly from testdata/)
-3. to be continued ...
+1. put promises into components, so that data will be displayed in frontend
+2. to be continued ...

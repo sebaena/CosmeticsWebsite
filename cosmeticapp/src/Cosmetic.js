@@ -1,14 +1,14 @@
 import { useState } from "react";
 import Ingredient from "./Ingredient";
 
-var ingredientsList = require("./testdata/ingredients.json");
+var db = require("./testdata/db.json");
 
 const Cosmetic = (props) => {
   const { cosmetic } = props;
   const [activeIngredient, setActiveIngredient] = useState({});
 
   const searchIngredientFuc = (name) => {
-    const foundIngredientFuc = ingredientsList.ingredientsList.find(
+    const foundIngredientFuc = db.ingredientsList.find(
       (ingredient) => ingredient.name === name
     );
     foundIngredientFuc

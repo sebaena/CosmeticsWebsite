@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Cosmetic from "./Cosmetic";
 
-var cosmeticsList = require("./testdata/cosmetics.json");
+var db = require("./testdata/db.json");
 
 function App() {
-  const [cosmetic, setCosmetic] = useState(cosmeticsList.cosmeticsList[0]);
+  const [cosmetic, setCosmetic] = useState(db.cosmeticsList[0]);
   const [itemIndex, setItemIndex] = useState(0);
   const [searchName, setSearchName] = useState("");
 
@@ -12,8 +12,8 @@ function App() {
   // console.log(ingredientsList);
 
   const nextItem = () => {
-    itemIndex == cosmeticsList.cosmeticsList.length - 1 ? setItemIndex(0) : setItemIndex(itemIndex + 1);
-    setCosmetic(cosmeticsList.cosmeticsList[itemIndex]);
+    itemIndex == db.cosmeticsList.length - 1 ? setItemIndex(0) : setItemIndex(itemIndex + 1);
+    setCosmetic(db.cosmeticsList[itemIndex]);
   }
 
   // handle searchbox text changes
@@ -21,7 +21,7 @@ function App() {
     setSearchName(e.target.value);
     e.preventDefault();
     // search searchbox input text from cosmeticsList, if cosmetic name includes the searchbox text, then display it
-    const foundCosmetic = cosmeticsList.cosmeticsList.find(cosmetic => cosmetic.name.toLowerCase().includes(e.target.value.toLowerCase()));
+    const foundCosmetic = db.cosmeticsList.find(cosmetic => cosmetic.name.toLowerCase().includes(e.target.value.toLowerCase()));
     if(foundCosmetic){
       setCosmetic(foundCosmetic);
     }
