@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import axios from 'axios'
+// import axios from 'axios'
 
-const consmeticsListPromise = axios.get('http://localhost:3001/cosmeticsList')
-console.log(consmeticsListPromise)
+// const consmeticsListPromise = axios.get('http://localhost:3001/cosmeticsList')
+// console.log(consmeticsListPromise)
 
-const ingredientsListPromise = axios.get('http://localhost:3001/ingredientsList')
-console.log(ingredientsListPromise)
+// const ingredientsListPromise = axios.get('http://localhost:3001/ingredientsList')
+// console.log(ingredientsListPromise)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
