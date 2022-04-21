@@ -6,8 +6,8 @@ We try to build a website for users to easily find the functions of the ingredie
 1.  git clone https://github.com/sebaena/CosmeticsWebsite
 2.  cd CosmeticsWebsite/cosmeticapp/
 3.  npm install
-4.1 npm start (start frontend)
-4.2 npm server (start server)
+4.  npm start (start frontend)
+5.  npm server (start server)
 
 # directory structure
 - CosmeticsWebsite/cosmeticapp/public/
