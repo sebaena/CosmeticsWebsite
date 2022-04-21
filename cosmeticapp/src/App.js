@@ -33,16 +33,16 @@ function App() {
     }
   };
 
-  const serverResponseHook = () => {
-    console.log("try to get response from server!");
+  const getCosmeticsListHook = () => {
+    console.log("try to get response from server from App.js!");
     axios.get("http://localhost:3001/cosmeticsList").then((response) => {
-      console.log("get response from server, promise fulfilled!");
+      console.log("get response from server, promise fulfilled! from App.js");
       console.log(response.data);
       setCosmeticsList(response.data);
     });
   };
 
-  useEffect(serverResponseHook, []);
+  useEffect(getCosmeticsListHook, []);
 
   return (
     <div>
