@@ -10,14 +10,14 @@ We try to build a website for users to easily find the functions of the ingredie
 4.2 npm server (start server)
 
 # directory structure
-CosmeticsWebsite/cosmeticapp/public/
- - for index.html and manifest.json
-CosmeticsWebsite/cosmeticapp/src
- - for component and index.js
-CosmeticsWebsite/cosmeticapp/public/pictures
- - for test pictures, temporary files
-CosmeticsWebsite/cosmeticapp/src/testdata
- - for test data, temporary files
+- CosmeticsWebsite/cosmeticapp/public/
+for index.html and manifest.json
+- CosmeticsWebsite/cosmeticapp/src
+for component and index.js
+- CosmeticsWebsite/cosmeticapp/public/pictures
+for test pictures, temporary files
+- CosmeticsWebsite/cosmeticapp/src/testdata
+for test data, temporary files
 
 # Released features:
 1. dynamic search cosmetics by name
