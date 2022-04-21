@@ -9,7 +9,7 @@ We try to build a website for users to easily find the functions of the ingredie
 4.  npm start (start frontend)
 5.  npm server (start server)
 
-# directory structure
+# Directory structure
 - CosmeticsWebsite/cosmeticapp/public/
   - for index.html and manifest.json
 - CosmeticsWebsite/cosmeticapp/src
