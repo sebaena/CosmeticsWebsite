@@ -20,6 +20,7 @@ We try to build a website for users to easily find the functions of the ingredie
   - for test data, temporary files
 
 # TODO:
+0. error catch for promisese should be added
 1. ingredent function should be freshed if user changes product
 2. check and filter function in cosmetic componet should be in backend???
 3. start to build backend server with express.js
