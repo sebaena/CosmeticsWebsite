@@ -2,7 +2,7 @@
   "cosmeticsList": [
     {
       "_id": "625da774913c95013ab4b432",
-      "index": 0,
+      "id": 0,
       "name": "Lumene Nordic Hydra Cream",
       "picture": "pictures/lumene_nordic_hydra_cream.jpeg",
       "ingredients": [
@@ -25,7 +25,7 @@
     },
     {
       "_id": "af25da774913c95013ab4b43",
-      "index": 1,
+      "id": 1,
       "name": "Lumene CC cream",
       "picture": "pictures/lumene_cc_cream.jpeg",
       "ingredients": [
@@ -42,7 +42,7 @@
     },
     {
       "_id": "af25da774913c9xxxxxb4b43",
-      "index": 2,
+      "id": 2,
       "name": "Lumene superpower perfume",
       "picture": "pictures/lumene_superpower_perfume.jpeg",
       "ingredients": [
@@ -61,30 +61,37 @@
 
   "ingredientsList": [
     {
+      "id": 0,
       "name": "Aqua",
       "function": "Moisturize skin"
     },
     {
+      "id": 1,
       "name": "Caprylic",
       "function": "Moisturize deep skin"
     },
     {
+      "id": 2,
       "name": "Shea Butter",
       "function": "I don't know why do you put butter on the face"
     },
     {
+      "id": 3,
       "name": "Hydrogenated Polydecene",
       "function": "Make your skin as smooth as baby butt"
     },
     {
+      "id": 4,
       "name": "Propanediol",
       "function": "smells good"
     },
     {
+      "id": 5,
       "name": "Diisopropyl",
       "function": "this is an English word??"
     },
     {
+      "id": 6,
       "name": "Glycerin",
       "function": "clean the dirty skin"
     }

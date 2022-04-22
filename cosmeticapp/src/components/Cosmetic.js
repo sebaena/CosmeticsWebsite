@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Ingredient from "./Ingredient";
+import ingredientService from "../services/ingredient";
 
-var db = require("./testdata/db.json");
+var db = require("../testdata/db.json");
 
 const Cosmetic = (props) => {
   const { cosmetic } = props;
@@ -21,16 +22,12 @@ const Cosmetic = (props) => {
       : setActiveIngredient({ name: name, function: "na" });
   };
 
-  const getIngredientsList = () => {
-    console.log("try to get response from server! from Cosmetic.js");
-    axios.get("http://localhost:3001/ingredientsList").then((response) => {
-      console.log("get response from server, promise fulfilled! from Cosmetic.js");
-      console.log(response.data);
-      setIngredientsList(response.data);
+  useEffect(() => {
+    ingredientService.getAll().then((initialIngredients) => {
+      console.log(initialIngredients);
+      setIngredientsList(initialIngredients);
     });
-  };
-
-  useEffect(getIngredientsList, []);
+  }, []);
 
   return (
     <div>

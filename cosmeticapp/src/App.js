@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Cosmetic from "./Cosmetic";
+import Cosmetic from "./components/Cosmetic";
+import cosmeticService from "./services/cosmetic";
 
 var db = require("./testdata/db.json");
 
@@ -33,16 +34,12 @@ function App() {
     }
   };
 
-  const getCosmeticsListHook = () => {
-    console.log("try to get response from server from App.js!");
-    axios.get("http://localhost:3001/cosmeticsList").then((response) => {
-      console.log("get response from server, promise fulfilled! from App.js");
-      console.log(response.data);
-      setCosmeticsList(response.data);
+  useEffect(() => {
+    cosmeticService.getAll().then((initialCosmetics) => {
+      console.log(initialCosmetics);
+      setCosmeticsList(initialCosmetics);
     });
-  };
-
-  useEffect(getCosmeticsListHook, []);
+  }, []);
 
   return (
     <div>

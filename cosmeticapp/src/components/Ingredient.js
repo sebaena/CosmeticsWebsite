@@ -2,8 +2,8 @@ const Ingredient = (props) => {
   const { ingredient } = props;
   return (
     <div>
-      <p>{ingredient.name}</p>
-      <p>{ingredient.function}</p>
+      <p className="ingredientFunc">{ingredient.name}</p>
+      <p className="ingredientFunc">{ingredient.function}</p>
     </div>
   );
 };
