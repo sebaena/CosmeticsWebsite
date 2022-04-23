@@ -10,14 +10,13 @@ We try to build a website for users to easily find the functions of the ingredie
 5.  npm server (start server)
 
 # Directory structure
-- CosmeticsWebsite/cosmeticapp/public/
-  - for index.html and manifest.json
-- CosmeticsWebsite/cosmeticapp/src
-  - for component and index.js
-- CosmeticsWebsite/cosmeticapp/public/pictures
-  - for test pictures, temporary files
-- CosmeticsWebsite/cosmeticapp/src/testdata
-  - for test data, temporary files
+- /cosmeticapp/public/ --- for index.html and manifest.json
+- /cosmeticapp/src/ --- for component and index.js
+- /cosmeticapp/public/pictures/ --- for test pictures, temporary files
+- /cosmeticapp/src/testdata/ --- for test data, temporary files
+
+- /backend/ --- for backend server
+- /backend/requests/ --- for testing server RESTFUL functions, install REST client from vscode to use it
 
 # TODO:
 0. error catch for promisese should be added
