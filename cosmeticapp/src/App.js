@@ -9,6 +9,7 @@ function App() {
   const [cosmeticsList, setCosmeticsList] = useState();
   const [cosmetic, setCosmetic] = useState(db.cosmeticsList[0]);
   const [itemIndex, setItemIndex] = useState(0);
+  const [all, setAll] = useState(false);
   const [searchName, setSearchName] = useState("");
 
   // console.log(cosmeticsList);
@@ -19,6 +20,10 @@ function App() {
       ? setItemIndex(0)
       : setItemIndex(itemIndex + 1);
     setCosmetic(db.cosmeticsList[itemIndex]);
+  };
+
+  const showAll = () => {
+    setAll(true);
   };
 
   // handle searchbox text changes
@@ -52,7 +57,16 @@ function App() {
         ></input>
       </label>
       <button onClick={nextItem}>Next Item</button>
-      <Cosmetic cosmetic={cosmetic} />
+      <button onClick={showAll}>Show all</button>
+      {
+        all && db.cosmeticsList.map(item => 
+          <Cosmetic 
+            cosmetic={item}
+          />)
+      }
+      <Cosmetic 
+        cosmetic={cosmetic} 
+      />
     </div>
   );
 }
