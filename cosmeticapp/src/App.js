@@ -22,9 +22,8 @@ function App() {
     setCosmetic(db.cosmeticsList[itemIndex]);
   };
 
-  const showAll = () => {
-    setAll(true);
-  };
+  const showAll = () =>  setAll(true); 
+  const clearPage = () =>  setAll(false); 
 
   // handle searchbox text changes
   const handleSearchBoxChange = (e) => {
@@ -56,8 +55,10 @@ function App() {
           onChange={(event) => handleSearchBoxChange(event)}
         ></input>
       </label>
+
       <button onClick={nextItem}>Next Item</button>
       <button onClick={showAll}>Show all</button>
+      <button onClick={clearPage}>Clear</button>
       {
         all && db.cosmeticsList.map(item => 
           <Cosmetic 
