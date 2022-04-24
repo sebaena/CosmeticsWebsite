@@ -63,6 +63,7 @@ function App() {
         all && db.cosmeticsList.map(item => 
           <Cosmetic 
             cosmetic={item}
+            key={item._id}
           />)
       }
       <Cosmetic 
