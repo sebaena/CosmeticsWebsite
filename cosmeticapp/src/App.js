@@ -70,9 +70,6 @@ function App() {
       { view == "add"     && <NewEntry /> }
       { view == "clear"   && <li>Please search for an item or press "next item"</li> }
 
-
-
-
     </div>
   );
 }
