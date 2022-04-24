@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 import Cosmetic from "./components/Cosmetic";
+import NewEntry from "./components/NewEntry";
+import DisplayAll from "./components/DisplayAll";
 import cosmeticService from "./services/cosmetic";
 
 var db = require("./testdata/db.json");
@@ -9,7 +12,8 @@ function App() {
   const [cosmeticsList, setCosmeticsList] = useState();
   const [cosmetic, setCosmetic] = useState(db.cosmeticsList[0]);
   const [itemIndex, setItemIndex] = useState(0);
-  const [all, setAll] = useState(false);
+  const [view, setView] = useState('default');
+  const [entry, setEntry] = useState(false);
   const [searchName, setSearchName] = useState("");
 
   // console.log(cosmeticsList);
@@ -20,10 +24,9 @@ function App() {
       ? setItemIndex(0)
       : setItemIndex(itemIndex + 1);
     setCosmetic(db.cosmeticsList[itemIndex]);
+    setView("default");
   };
 
-  const showAll = () =>  setAll(true); 
-  const clearPage = () =>  setAll(false); 
 
   // handle searchbox text changes
   const handleSearchBoxChange = (e) => {
@@ -35,6 +38,7 @@ function App() {
     );
     if (foundCosmetic) {
       setCosmetic(foundCosmetic);
+      setView("default")
     }
   };
 
@@ -57,18 +61,18 @@ function App() {
       </label>
 
       <button onClick={nextItem}>Next Item</button>
-      <button onClick={showAll}>Show all</button>
-      <button onClick={clearPage}>Clear</button>
-      {
-        all && db.cosmeticsList.map(item => 
-          <Cosmetic 
-            cosmetic={item}
-            key={item._id}
-          />)
-      }
-      <Cosmetic 
-        cosmetic={cosmetic} 
-      />
+      <button onClick={()=>{setView("all")}}>Show all</button>
+      <button onClick={()=>{setView("clear")}}>Clear</button>
+      <button onClick={()=>{setView("add")}}>Add Entry</button>
+
+      { view == "all"     && <DisplayAll all_cosmetics={db.cosmeticsList} /> }
+      { view == "default" && <Cosmetic cosmetic={cosmetic} /> }
+      { view == "add"     && <NewEntry /> }
+      { view == "clear"   && <li>Please search for an item or press "next item"</li> }
+
+
+
+
     </div>
   );
 }
