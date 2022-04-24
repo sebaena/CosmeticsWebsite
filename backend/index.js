@@ -2,8 +2,6 @@ const { response } = require("express");
 const express = require("express");
 const app = express();
 
-app.use(express.json());
-
 let cosmetics = [
   {
     _id: "625da774913c95013ab4b432",
@@ -64,15 +62,25 @@ let cosmetics = [
   },
 ];
 
-const PORT = 3001;
-app.listen(PORT, () => {
-  console.log(`mafakas is running server on PORT ${PORT}`);
-});
+// Middleware
+const requestLogger = (request, response, next) => {
+  console.log("Method:", request.method);
+  console.log("Path:  ", request.path);
+  console.log("Body:  ", request.body);
+  console.log("---");
+  next();
+};
+app.use(express.json());
+app.use(requestLogger);
 
+// routes
 app.get("/", (request, response) => {
   response.send("<h1>There ain't got nothing, get out of here!</h1>");
 });
 
+/*****************************/
+// cosmetic RESTFUL start
+/*****************************/
 app.get("/api/cosmetics", (request, response) => {
   response.json(cosmetics);
 });
@@ -123,4 +131,19 @@ app.post("/api/cosmetics", (request, response) => {
   cosmetics = cosmetics.concat(cosmetic);
   // return response
   response.json(cosmetics);
+});
+/*****************************/
+// cosmetic RESTFUL end
+/*****************************/
+
+// middleware
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: "unknown url address" });
+};
+app.use(unknownEndpoint);
+
+// start the port
+const PORT = 3001;
+app.listen(PORT, () => {
+  console.log(`mafakas is running server on PORT ${PORT}`);
 });
