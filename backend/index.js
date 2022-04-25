@@ -1,6 +1,27 @@
 const { response } = require("express");
 const express = require("express");
 const app = express();
+// use mongoose to connect to mongo atlas database
+const mongoose = require('mongoose');
+const dbUser = "cosmeticApp";
+const dbPassword = "protossisnotop";
+const url = `mongodb+srv://${dbUser}:${dbPassword}@cluster0.ptrgb.mongodb.net/cosmeticApp?retryWrites=true&w=majority`;
+mongoose.connect(url);
+// create Cosmetic model for database
+const cosmeticSchema = new mongoose.Schema({
+  id: Number,
+  name: String,
+  picture: String,
+  ingredients: Object
+});
+const Cosmetic = mongoose.model('Cosmetic', cosmeticSchema);
+// create Ingredient model for database
+const ingredientSchema = new mongoose.Schema({
+  id: Number,
+  name: String,
+  feature: String
+});
+const Ingredient = mongoose.model('Ingredient', ingredientSchema);
 
 // Middleware
 const cors = require('cors');
