@@ -21,12 +21,12 @@ const Cosmetic = (props) => {
       : setActiveIngredient({ name: name, function: "na" });
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     ingredientService.getAll().then((initialIngredients) => {
       console.log(initialIngredients);
       setIngredientsList(initialIngredients);
     });
-  }, []);
+  }, []);*/
 
   return (
     <div>
