@@ -2,6 +2,10 @@ const { response } = require("express");
 const express = require("express");
 const app = express();
 
+// Middleware
+const cors = require('cors');
+app.use(cors());
+
 let cosmetics = [
   {
     _id: "625da774913c95013ab4b432",
@@ -143,7 +147,7 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint);
 
 // start the port
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`mafakas is running server on PORT ${PORT}`);
 });
