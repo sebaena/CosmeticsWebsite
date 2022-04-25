@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 
 import Cosmetic from "./components/Cosmetic";
 import NewEntry from "./components/NewEntry";
