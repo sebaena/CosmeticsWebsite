@@ -22,9 +22,6 @@ We try to build a website for users to easily find the functions of the ingredie
 0. error catch for promisese should be added
 1. ingredent function should be freshed if user changes product
 2. check and filter function in cosmetic componet should be in backend???
-3. add ingredient REST functions
-4. connect backend with frontend
-5. connect to mango database
 6. to be continued ...
 
 # Released features:
@@ -35,3 +32,6 @@ We try to build a website for users to easily find the functions of the ingredie
 5. put promises into components, so that data will be displayed in frontend
 6. add services, add index.css
 7. add backend server index.js, implement REST functions for cosmtic
+8. add ingredient REST functions
+9. connect backend with frontend
+10. connect to mango database
