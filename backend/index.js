@@ -1,34 +1,46 @@
-const { response } = require("express");
-const express = require("express");
-const app = express();
-// use mongoose to connect to mongo atlas database
-const mongoose = require('mongoose');
-const dbUser = "cosmeticApp";
-const dbPassword = "protossisnotop";
-const url = `mongodb+srv://${dbUser}:${dbPassword}@cluster0.ptrgb.mongodb.net/cosmeticApp?retryWrites=true&w=majority`;
-mongoose.connect(url);
+const app = require('./app') // main express application
+const http = require('http')
+const config = require('./utils/config')
+const logger = require('./utils/logger')
+
+const server = http.createServer(app);
+
+server.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`)
+})
+//require('dotenv').config()
+// import APIs
+//const { response } = require("express");
+//const express = require("express");
+//const app = express();
+// import models
+//const Cosmetic = require('./models/cosmetic')
+//const Ingredient = require('./models/ingredient')
+// import mongoose to connect to mongo atlas database
+//const mongoose = require('mongoose');
+//mongoose.connect(process.env.MONGODB_URL);
 // create Cosmetic model for database
-const cosmeticSchema = new mongoose.Schema({
+/*const cosmeticSchema = new mongoose.Schema({
   id: Number,
   name: String,
   picture: String,
   ingredients: Object
 });
-const Cosmetic = mongoose.model('Cosmetic', cosmeticSchema);
+const Cosmetic = mongoose.model('Cosmetic', cosmeticSchema);*/
 // create Ingredient model for database
-const ingredientSchema = new mongoose.Schema({
+/*const ingredientSchema = new mongoose.Schema({
   id: Number,
   name: String,
   feature: String
 });
-const Ingredient = mongoose.model('Ingredient', ingredientSchema);
+const Ingredient = mongoose.model('Ingredient', ingredientSchema);*/
 
 // Middleware
-const cors = require('cors');
+/*const cors = require('cors');
 app.use(cors());
 app.use(express.static('build'))
-
-let cosmetics = [
+*/
+/*let cosmetics = [
   {
     _id: "625da774913c95013ab4b432",
     id: 0,
@@ -86,10 +98,10 @@ let cosmetics = [
       },
     ],
   },
-];
+];*/
 
 // Middleware
-const requestLogger = (request, response, next) => {
+/*const requestLogger = (request, response, next) => {
   console.log("Method:", request.method);
   console.log("Path:  ", request.path);
   console.log("Body:  ", request.body);
@@ -102,12 +114,12 @@ app.use(requestLogger);
 // routes
 app.get("/", (request, response) => {
   response.send("<h1>There ain't got nothing, get out of here!</h1>");
-});
+});*/
 
-/*****************************/
-// cosmetic RESTFUL start
-/*****************************/
-app.get("/api/cosmetics", (request, response) => {
+/************************************/
+// cosmetic RESTFUL for testing begin
+/************************************/
+/*app.get("/api/cosmetics", (request, response) => {
   response.json(cosmetics);
 });
 
@@ -123,12 +135,12 @@ app.get("/api/cosmetics/:id", (request, response) => {
 });
 
 // get all cosmetics
-app.get("/api/cosmetics", (request, response) => {
+app.get("/api/test/cosmetics", (request, response) => {
   response.json(cosmetics);
 });
 
 // delete one cosmetic by requested id
-app.delete("/api/cosmetics/:id", (request, response) => {
+app.delete("/api/test/cosmetics/:id", (request, response) => {
   const id = Number(request.params.id);
   cosmetics = cosmetics.filter((cosmetic) => cosmetic.id !== id);
 
@@ -143,7 +155,7 @@ const generateId = () => {
   const maxId = cosmetics.length > 0 ? Math.max(...ids) : 0;
   return maxId + 1;
 };
-app.post("/api/cosmetics", (request, response) => {
+app.post("/api/test/cosmetics", (request, response) => {
   const body = request.body;
   // if cosmetic name is missing, return error
   if (!body.name) {
@@ -157,19 +169,19 @@ app.post("/api/cosmetics", (request, response) => {
   cosmetics = cosmetics.concat(cosmetic);
   // return response
   response.json(cosmetics);
-});
-/*****************************/
-// cosmetic RESTFUL end
-/*****************************/
+});*/
+/************************************/
+// cosmetic RESTFUL for testing end
+/************************************/
 
 // middleware
-const unknownEndpoint = (request, response) => {
+/*const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: "unknown url address" });
 };
-app.use(unknownEndpoint);
+app.use(unknownEndpoint);*/
 
 // start the port
-const PORT = process.env.PORT || 3001;
+/*const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`mafakas is running server on PORT ${PORT}`);
-});
+});*/
