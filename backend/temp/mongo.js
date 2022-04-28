@@ -9,7 +9,7 @@ if (process.argv.length < 3) {
 
 const password = process.argv[2];
 
-const url = `mongodb+srv://cosmeticApp:${password}@cluster0.ptrgb.mongodb.net/cosmeticApp?retryWrites=true&w=majority`;
+const url = `mongodb+srv://cosmeticApp:${password}@cluster0.ptrgb.mongodb.net/testCosmeticApp?retryWrites=true&w=majority`;
 
 mongoose.connect(url);
 
@@ -146,4 +146,4 @@ ing.forEach((i) => {
 });
 
 //Cosmetic.insertMany(cos).then((res) => mongoose.connection.close());
-//Ingredient.insertMany(ing).then((res) => mongoose.connection.close());
+Ingredient.insertMany(ing).then((res) => mongoose.connection.close());
