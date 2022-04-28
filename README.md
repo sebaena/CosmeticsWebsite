@@ -6,17 +6,17 @@ We try to build a website for users to easily find the functions of the ingredie
 1. git clone https://github.com/sebaena/CosmeticsWebsite
 2. cd CosmeticsWebsite/cosmeticapp/
 3. npm install
-npm start (start frontend)
-npm server (start server)
-npm build (build frontend into package into build/)
-4. cd backend/
-5. npm install
-npm run start (start run backend server)
-npm run dev (start run backend server in development mode)
-npm run build:ui (build frontend into package and copy it into backend)
-npm run deploy (deploy everything into heroku)
-npm run deploy:full (buid frontend, copy into backend and deploy everything into heroku)
-npm run test (run test)
+4. npm start (start frontend)
+4. npm server (start server)
+4. npm build (build frontend into package into build/)
+5. cd backend/
+6. npm install
+7. npm run start (start run backend server)
+7. npm run dev (start run backend server in development mode)
+7. npm run build:ui (build frontend into package and copy it into backend)
+7. npm run deploy (deploy everything into heroku)
+7. npm run deploy:full (buid frontend, copy into backend and deploy everything into heroku)
+7. npm run test (run test)
 
 # Guidelines to deploy the tests
 1. cd backend
