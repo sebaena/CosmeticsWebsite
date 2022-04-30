@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Ingredient from "./Ingredient";
 import ingredientService from "../services/ingredient";
 
@@ -22,12 +21,12 @@ const Cosmetic = (props) => {
       : setActiveIngredient({ name: name, function: "na" });
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     ingredientService.getAll().then((initialIngredients) => {
       console.log(initialIngredients);
       setIngredientsList(initialIngredients);
     });
-  }, []);
+  }, []);*/
 
   return (
     <div>
