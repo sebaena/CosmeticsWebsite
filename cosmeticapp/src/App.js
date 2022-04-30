@@ -64,10 +64,10 @@ function App() {
       <button onClick={()=>{setView("clear")}}>Clear</button>
       <button onClick={()=>{setView("add")}}>Add Entry</button>
 
-      { view == "all"     && <DisplayAll all_cosmetics={db.cosmeticsList} /> }
-      { view == "default" && <Cosmetic cosmetic={cosmetic} /> }
-      { view == "add"     && <NewEntry /> }
-      { view == "clear"   && <li>Please search for an item or press "next item"</li> }
+      { view === "all"     && <DisplayAll all_cosmetics={db.cosmeticsList} /> }
+      { view === "default" && <Cosmetic cosmetic={cosmetic} /> }
+      { view === "add"     && <NewEntry /> }
+      { view === "clear"   && <li>Please search for an item or press "next item"</li> }
 
     </div>
   );
