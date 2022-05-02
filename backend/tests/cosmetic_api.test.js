@@ -1,95 +1,69 @@
 const mongoose = require("mongoose");
 const supertest = require("supertest");
+const helper = require("./test_helper");
 const app = require("../app");
 const api = supertest(app);
 
 const Cosmetic = require("../models/cosmetic");
-const initialCosmetics = [
-  {
-    id: 0,
-    name: "Lumene Nordic Hydra Cream",
-    picture: "pictures/lumene_nordic_hydra_cream.jpeg",
-    ingredients: [
-      {
-        name: "Aqua",
-      },
-      {
-        name: "Caprylic",
-      },
-      {
-        name: "Shea Butter",
-      },
-      {
-        name: "Hydrogenated Polydecene",
-      },
-      {
-        name: "Propanediol",
-      },
-    ],
-  },
-  {
-    id: 1,
-    name: "Lumene CC cream",
-    picture: "pictures/lumene_cc_cream.jpeg",
-    ingredients: [
-      {
-        name: "Aqua",
-      },
-      {
-        name: "Diisopropyl",
-      },
-      {
-        name: "Glycerin",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Lumene superpower perfume",
-    picture: "pictures/lumene_superpower_perfume.jpeg",
-    ingredients: [
-      {
-        name: "Aqua",
-      },
-      {
-        name: "Shea Butter",
-      },
-      {
-        name: "Propanediol",
-      },
-    ],
-  },
-];
 
 beforeEach(async ()=> {
     await Cosmetic.deleteMany({})
-    let cosmeticObject = new Cosmetic(initialCosmetics[0]);
+    let cosmeticObject = new Cosmetic(helper.initialCosmetics[0]);
     await cosmeticObject.save();
-    cosmeticObject = new Cosmetic(initialCosmetics[1]);
+    cosmeticObject = new Cosmetic(helper.initialCosmetics[1]);
     await cosmeticObject.save();
-    cosmeticObject = new Cosmetic(initialCosmetics[2]);
+    cosmeticObject = new Cosmetic(helper.initialCosmetics[2]);
     await cosmeticObject.save();
 })
 
-test("cosmetics are returned as json", async () => {
+test("Cosmetics are returned as json", async () => {
   await api
     .get("/api/cosmetics")
     .expect(200)
     .expect("Content-Type", /application\/json/);
-}, 100000);
+}, 500000);
 
-test(`there are ${initialCosmetics.length} test cosmetics`, async () => {
-  const response = await api.get("/api/cosmetics");
+test('All cosmetics are returned', async () => {
+  const response = await api.get('/api/cosmetics')
 
-  expect(response.body).toHaveLength(initialCosmetics.length);
-});
+  expect(response.body).toHaveLength(helper.initialCosmetics.length)
+})
 
-test(`the first cosmetic is ${initialCosmetics[0].name}`, async () => {
-  const response = await api.get("/api/cosmetics");
+test('A specific cosmetic is within the returned cosmetics', async () => {
+  const response = await api.get('/api/cosmetics')
 
-  const names = response.body.map(r => r.name);
-  expect(names).toContain(initialCosmetics[0].name);
-});
+  const names = response.body.map(cosmetic => cosmetic.name)
+
+  expect(names).toContain(helper.initialCosmetics[0].name)
+})
+
+test("A valid cosmetic can be added into db", async () => {
+  const newCosmetic = helper.initialCosmetics[0];
+
+  await api.post('/api/cosmetics')
+  .send(newCosmetic)
+  .expect(201)
+  .expect('Content-Type', /application\/json/)
+
+  const cosmeticInDb = await helper.cosmeticInDb();
+
+  expect(cosmeticInDb).toHaveLength(helper.initialCosmetics.length + 1);
+  expect(cosmeticInDb.filter(cosmetic => cosmetic.name === helper.initialCosmetics[0].name)).toHaveLength(2);
+})
+
+test("Cosmetic without name can't be added into db", async () => {
+  const newCosmetic = helper.initialCosmetics[0];
+  delete newCosmetic.name;
+
+  await api
+  .post('/api/cosmetics')
+  .send(newCosmetic)
+  .expect(400)
+
+  const cosmeticInDb = await helper.cosmeticInDb();
+
+  expect(cosmeticInDb).toHaveLength(helper.initialCosmetics.length);
+})
 
 afterAll(() => {
   mongoose.connection.close();

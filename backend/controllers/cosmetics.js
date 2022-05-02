@@ -21,12 +21,15 @@ cosmeticsRouter.get('/:id', (request, response, next) => {
 
 cosmeticsRouter.post('/', (request, response, next) => {
   const body = request.body
+  if(body.name == undefined){
+    return response.status(400).json({error : 'Name missing'});
+  }
 
   const cosmetic = new Cosmetic(body)
 
   cosmetic.save()
     .then(savedCosmetic => {
-      response.json(savedCosmetic)
+      response.status(201).json(savedCosmetic)
     })
     .catch(error => next(error))
 })

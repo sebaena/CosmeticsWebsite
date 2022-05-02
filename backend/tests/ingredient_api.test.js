@@ -1,84 +1,77 @@
 const mongoose = require("mongoose");
 const supertest = require("supertest");
+const helper = require("./test_helper");
 const app = require("../app");
 const api = supertest(app);
 
 const Ingredient = require("../models/ingredient");
-const initialIngredients = [
-  {
-    id: 0,
-    name: "Aqua",
-    function: "Moisturize skin",
-  },
-  {
-    id: 1,
-    name: "Caprylic",
-    function: "Moisturize deep skin",
-  },
-  {
-    id: 2,
-    name: "Shea Butter",
-    function: "I don't know why do you put butter on the face",
-  },
-  {
-    id: 3,
-    name: "Hydrogenated Polydecene",
-    function: "Make your skin as smooth as baby butt",
-  },
-  {
-    id: 4,
-    name: "Propanediol",
-    function: "smells good",
-  },
-  {
-    id: 5,
-    name: "Diisopropyl",
-    function: "this is an English word??",
-  },
-  {
-    id: 6,
-    name: "Glycerin",
-    function: "clean the dirty skin",
-  },
-];
 
 beforeEach(async () => {
   await Ingredient.deleteMany({});
-  let ingredientObject = new Ingredient(initialIngredients[0]);
+  let ingredientObject = new Ingredient(helper.initialIngredients[0]);
   await ingredientObject.save();
-  ingredientObject = new Ingredient(initialIngredients[1]);
+  ingredientObject = new Ingredient(helper.initialIngredients[1]);
   await ingredientObject.save();
-  ingredientObject = new Ingredient(initialIngredients[2]);
+  ingredientObject = new Ingredient(helper.initialIngredients[2]);
   await ingredientObject.save();
-  ingredientObject = new Ingredient(initialIngredients[3]);
+  ingredientObject = new Ingredient(helper.initialIngredients[3]);
   await ingredientObject.save();
-  ingredientObject = new Ingredient(initialIngredients[4]);
+  ingredientObject = new Ingredient(helper.initialIngredients[4]);
   await ingredientObject.save();
-  ingredientObject = new Ingredient(initialIngredients[5]);
+  ingredientObject = new Ingredient(helper.initialIngredients[5]);
   await ingredientObject.save();
-  ingredientObject = new Ingredient(initialIngredients[6]);
+  ingredientObject = new Ingredient(helper.initialIngredients[6]);
   await ingredientObject.save();
 });
 
-test("ingredients are returned as json", async () => {
+test("Ingredients are returned as json", async () => {
   await api
     .get("/api/ingredients")
     .expect(200)
     .expect("Content-Type", /application\/json/);
-}, 100000);
+}, 500000);
 
-test(`there are ${initialIngredients.length} test ingredients`, async () => {
-  const response = await api.get("/api/ingredients");
+test('All ingredients are returned', async () => {
+  const response = await api.get('/api/ingredients')
 
-  expect(response.body).toHaveLength(initialIngredients.length);
-});
+  expect(response.body).toHaveLength(helper.initialIngredients.length)
+})
 
-test(`the first ingredient is ${initialIngredients[0].name}`, async () => {
-  const response = await api.get("/api/ingredients");
+test('A specific ingredient is within the returned ingredients', async () => {
+  const response = await api.get('/api/ingredients')
 
-  const names = response.body.map((r) => r.name);
-  expect(names).toContain(initialIngredients[0].name);
-});
+  const names = response.body.map(ingredient => ingredient.name)
+
+  expect(names).toContain(helper.initialIngredients[0].name)
+})
+
+test("A valid ingredient can be added into db", async () => {
+  const newIngredient = helper.initialIngredients[0];
+
+  await api.post('/api/ingredients')
+  .send(newIngredient)
+  .expect(201)
+  .expect('Content-Type', /application\/json/)
+
+  const ingredientInDb = await helper.ingredientInDb();
+
+  expect(ingredientInDb).toHaveLength(helper.initialIngredients.length + 1);
+  expect(ingredientInDb.filter(ingredient => ingredient.name === helper.initialIngredients[0].name)).toHaveLength(2);
+})
+
+test("Ingredient without name can't be added into db", async () => {
+  const newIngredient = helper.initialIngredients[0];
+  delete newIngredient.name;
+
+  await api
+  .post('/api/ingredients')
+  .send(newIngredient)
+  .expect(400)
+
+  const ingredientInDb = await helper.ingredientInDb();
+
+  expect(ingredientInDb).toHaveLength(helper.initialIngredients.length);
+})
 
 afterAll(() => {
   mongoose.connection.close();
