@@ -65,6 +65,18 @@ test("Cosmetic without name can't be added into db", async () => {
   expect(cosmeticInDb).toHaveLength(helper.initialCosmetics.length);
 })
 
+test("a specific cosmetic can be feteched", async () => {
+  const firstCosmetic = helper.initialCosmetics[0];
+
+  const fetechedCosmetic = await api
+  .get(`/api/cosmetics/1`)
+  .expect(200)
+  .expect('Content-Type', /application\/json/)
+
+  expect(fetechedCosmetic.body).toEqual(firstCosmetic);
+})
+
+
 afterAll(() => {
   mongoose.connection.close();
 });
