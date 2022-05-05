@@ -41,7 +41,7 @@ cosmeticsRouter.put("/:id", async (request, response) => {
     cosmetic,
     { new: true }
   );
-  response.json(updatedCosmetic);
+  response.status(202).json(updatedCosmetic);
 });
 
 module.exports = cosmeticsRouter;

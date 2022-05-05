@@ -97,13 +97,7 @@ const initialIngredients = [
 ];
 
 const nonExistingCosmeticId = async () => {
-  const cosmetic = new Cosmetic({
-    name: "test",
-  });
-  await cosmetic.save();
-  await cosmetic.remove();
-
-  return cosmetic._id.toString();
+  return initialCosmetics.length + 10000;
 };
 
 const cosmeticInDb = async () => {
@@ -118,7 +112,7 @@ const nonExistingIngredientId = async () => {
   await ingredient.save();
   await ingredient.remove();
 
-  return ingredient._id.toString();
+  return ingredient.id.toString();
 };
 
 const ingredientInDb = async () => {
