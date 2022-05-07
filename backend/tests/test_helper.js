@@ -1,35 +1,7 @@
-const mongoose = require("mongoose");
+const Cosmetic = require("../models/cosmetic");
+const Ingredient = require("../models/ingredient");
 
-if (process.argv.length < 3) {
-  console.log(
-    "Please provide the password as an argument: node mongo.js <password>"
-  );
-  process.exit(1);
-}
-
-const password = process.argv[2];
-
-const url = `mongodb+srv://cosmeticApp:${password}@cluster0.8bcxs.mongodb.net/cosmeticApp?retryWrites=true&w=majority`;
-
-mongoose.connect(url);
-
-// create Cosmetic model for database
-const cosmeticSchema = new mongoose.Schema({
-  id: Number,
-  name: String,
-  picture: String,
-  ingredients: Object,
-});
-const Cosmetic = mongoose.model("Cosmetic", cosmeticSchema);
-// create Ingredient model for database
-const ingredientSchema = new mongoose.Schema({
-  id: Number,
-  name: String,
-  function: String,
-});
-const Ingredient = mongoose.model("Ingredient", ingredientSchema);
-
-let cosmetics = [
+const initialCosmetics = [
   {
     id: 0,
     name: "Lumene Nordic Hydra Cream",
@@ -86,7 +58,7 @@ let cosmetics = [
   },
 ];
 
-let ingredients = [
+const initialIngredients = [
   {
     id: 0,
     name: "Aqua",
@@ -124,12 +96,35 @@ let ingredients = [
   },
 ];
 
-for (let cosmetic of cosmetics) {
-  let cosmeticObject = new Cosmetic(cosmetic);
-  cosmeticObject.save();
-}
+const nonExistingCosmeticId = async () => {
+  return initialCosmetics.length + 10000;
+};
 
-for (let ingredient of ingredients) {
-  let ingredientObject = new Ingredient(ingredient);
-  ingredientObject.save();
-}
+const cosmeticInDb = async () => {
+  const cosmetics = await Cosmetic.find({});
+  return cosmetics.map((cosmetic) => cosmetic.toJSON());
+};
+
+const nonExistingIngredientId = async () => {
+  const ingredient = new Ingredient({
+    name: "test",
+  });
+  await ingredient.save();
+  await ingredient.remove();
+
+  return ingredient.id.toString();
+};
+
+const ingredientInDb = async () => {
+  const ingredients = await Ingredient.find({});
+  return ingredients.map((ingredient) => ingredient.toJSON());
+};
+
+module.exports = {
+  initialCosmetics,
+  initialIngredients,
+  nonExistingCosmeticId,
+  nonExistingIngredientId,
+  cosmeticInDb,
+  ingredientInDb,
+};

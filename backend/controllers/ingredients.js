@@ -21,12 +21,15 @@ ingredientsRouter.get('/:id', (request, response, next) => {
 
 ingredientsRouter.post('/', (request, response, next) => {
   const body = request.body
+  if(body.name == undefined){
+    return response.status(400).json({error : 'Name missing'});
+  }
 
   const ingredient = new Ingredient(body)
 
   ingredient.save()
     .then(savedIngredient => {
-      response.json(savedIngredient)
+      response.status(201).json(savedIngredient)
     })
     .catch(error => next(error))
 })
