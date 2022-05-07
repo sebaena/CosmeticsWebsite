@@ -1,5 +1,6 @@
 import {useState} from "react";
 import cosmeticService from "../services/cosmetic";
+import ingredientService from "../services/ingredient";
 
 const NewEntry = () =>{
 
