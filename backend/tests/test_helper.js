@@ -106,13 +106,7 @@ const cosmeticInDb = async () => {
 };
 
 const nonExistingIngredientId = async () => {
-  const ingredient = new Ingredient({
-    name: "test",
-  });
-  await ingredient.save();
-  await ingredient.remove();
-
-  return ingredient.id.toString();
+  return initialIngredients.length + 10000;
 };
 
 const ingredientInDb = async () => {
