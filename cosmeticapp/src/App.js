@@ -9,7 +9,7 @@ var db = require("./testdata/db.json");
 
 function App() {
   const [cosmeticsList, setCosmeticsList] = useState();
-  const [cosmetic, setCosmetic] = useState(db.cosmeticsList[0]);
+  const [cosmetic, setCosmetic] = useState();
   const [itemIndex, setItemIndex] = useState(0);
   const [view, setView] = useState('default');
   const [entry, setEntry] = useState(false);

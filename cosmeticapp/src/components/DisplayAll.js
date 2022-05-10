@@ -8,7 +8,7 @@ const DisplayAll = ({all_cosmetics}) =>{
         all_cosmetics.map(item => 
           <Cosmetic 
             cosmetic={item}
-            key={item._id}
+            key={item.id}
           />
         )
       }

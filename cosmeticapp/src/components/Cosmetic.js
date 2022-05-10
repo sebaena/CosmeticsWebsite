@@ -28,7 +28,7 @@ const Cosmetic = (props) => {
     });
   }, []);*/
 
-  return (
+  return cosmetic ? (
     <div>
       <img src={cosmetic.picture} />
       <p>Cosmetic Name : {cosmetic.name}</p>
@@ -46,6 +46,8 @@ const Cosmetic = (props) => {
       </ul>
       <Ingredient ingredient={activeIngredient} />
     </div>
+  ) : (
+    <div>Nothing to show</div>
   );
 };
 
