@@ -8,15 +8,11 @@ import cosmeticService from "./services/cosmetic";
 var db = require("./testdata/db.json");
 
 function App() {
-  const [cosmeticsList, setCosmeticsList] = useState();
   const [cosmetic, setCosmetic] = useState();
   const [itemIndex, setItemIndex] = useState(0);
   const [view, setView] = useState('default');
   const [entry, setEntry] = useState(false);
   const [searchName, setSearchName] = useState("");
-
-  // console.log(cosmeticsList);
-  // console.log(ingredientsList);
 
   const nextItem = () => {
     itemIndex == db.cosmeticsList.length - 1
@@ -25,7 +21,6 @@ function App() {
     setCosmetic(db.cosmeticsList[itemIndex]);
     setView("default");
   };
-
 
   // handle searchbox text changes
   const handleSearchBoxChange = (e) => {
@@ -42,9 +37,13 @@ function App() {
   };
 
   useEffect(() => {
-    cosmeticService.getAll().then((initialCosmetics) => {
+    /*cosmeticService.getAll().then((initialCosmetics) => {
       console.log(initialCosmetics);
       setCosmeticsList(initialCosmetics);
+    });*/
+    console.log("Read the cosmetic with id == 0 from db to initialize frontpage");
+    cosmeticService.getOne(0).then((cosmetic) => {
+      setCosmetic(cosmetic);
     });
   }, []);
 
