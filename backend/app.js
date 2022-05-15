@@ -3,6 +3,7 @@ const express = require('express')
 require('express-async-errors')
 const app = express()
 const cors = require('cors')
+const usersRouter = require('./controllers/users')
 const cosmeticsRouter = require('./controllers/cosmetics')
 const ingredientsRouter = require('./controllers/ingredients')
 const middleware = require('./utils/middleware')
@@ -25,6 +26,7 @@ app.use(express.static('build')); // use frontend ready-build from ./build/
 app.use(express.json()); // use json format for request and response
 app.use(middleware.requestLogger); // self-defined middleware
 /***************routes*****************/
+app.use('/api/users', usersRouter);
 app.use('/api/cosmetics', cosmeticsRouter);
 app.use('/api/ingredients', ingredientsRouter);
 /**************************************/

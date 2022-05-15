@@ -1,5 +1,6 @@
 const Cosmetic = require("../models/cosmetic");
 const Ingredient = require("../models/ingredient");
+const User = require("../models/user");
 
 const initialCosmetics = [
   {
@@ -114,6 +115,11 @@ const ingredientInDb = async () => {
   return ingredients.map((ingredient) => ingredient.toJSON());
 };
 
+const userInDb = async () => {
+  const users = await User.find({});
+  return users.map(user => user.toJSON());
+}
+
 module.exports = {
   initialCosmetics,
   initialIngredients,
@@ -121,4 +127,5 @@ module.exports = {
   nonExistingIngredientId,
   cosmeticInDb,
   ingredientInDb,
+  userInDb
 };
