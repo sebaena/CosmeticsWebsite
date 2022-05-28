@@ -1,6 +1,12 @@
 import axios from "axios";
-//const baseUrl = process.env.REACT_APP_URL + "api/cosmetics";
-const baseUrl = "/api/cosmetics";
+const baseUrl = process.env.REACT_APP_URL + "api/cosmetics";
+//const baseUrl = "/api/cosmetics";
+
+let token = null
+
+const setToken = newToken => {
+  token = `bearer ${newToken}`
+}
 
 const getAll = () => {
   const request = axios.get(baseUrl);
@@ -13,7 +19,10 @@ const getOne = (id) => {
 };
 
 const create = (newObject) => {
-  const request = axios.post(baseUrl, newObject);
+  const config = {
+    header: {Authentication: token}
+  }
+  const request = axios.post(baseUrl, newObject, config);
   return request.then((response) => response.data).catch(error => console.log("create  error"));
 };
 
@@ -27,4 +36,5 @@ export default {
   getOne,
   create,
   update,
+  setToken
 };
