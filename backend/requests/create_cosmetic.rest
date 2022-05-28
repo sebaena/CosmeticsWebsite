@@ -1,20 +1,20 @@
-POST http://localhost:3001/api/cosmetics HTTP/1.1
+POST http://localhost:3003/api/cosmetics HTTP/1.1
 content-type: application/json
 
 {
     "_id": "xxxxda774913c95013ab4b43",
-    "id": 1,
-    "name": "Lumene XX cream",
+    "id": 4,
+    "name": "Prueba",
     "picture": "pictures/lumene_cc_cream.jpeg",
     "ingredients": [
     {
-        "name": "Aqua"
+        "name": "Aqfdsaua"
     },
     {
-        "name": "Diisopropyl"
+        "name": "asf"
     },
     {
-        "name": "Glycerin"
+        "name": "hdfghg"
     }
     ]
 }

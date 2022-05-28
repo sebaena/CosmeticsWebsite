@@ -1,3 +1,4 @@
+
 const cosmeticsRouter = require("express").Router();
 const Cosmetic = require("../models/cosmetic");
 
