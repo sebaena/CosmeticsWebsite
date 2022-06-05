@@ -23,7 +23,7 @@ const cosmeticSchema = new mongoose.Schema({
 
 cosmeticSchema.set("toJSON", {
   transform: (document, returnedObject) => {
-    delete returnedObject._id;
+    // delete returnedObject._id;
     delete returnedObject.__v;
   },
 });

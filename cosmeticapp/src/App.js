@@ -15,18 +15,22 @@ function App() {
   const [entry, setEntry] = useState(false);
   const [searchName, setSearchName] = useState("");
 
+  // keep all _id returned from the db 
+  const [dbids, setDbids] = useState([]);
+
   const [errorMessage, setErrorMessage] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
 
   const nextItem = () => {
+    console.log("holaaa");
     // itemIndex == db.cosmeticsList.length - 1
-    itemIndex == ids.length - 1
-      ? setItemIndex(0)
-      : setItemIndex(itemIndex + 1);
-    setCosmetic(db.cosmeticsList[itemIndex]);
-    setView("default");
+    // itemIndex == ids.length - 1
+    //   ? setItemIndex(0)
+    //   : setItemIndex(itemIndex + 1);
+    // setCosmetic(db.cosmeticsList[itemIndex]);
+    // setView("default");
   };
 
   // handle searchbox text changes
@@ -34,28 +38,64 @@ function App() {
     setSearchName(e.target.value);
     e.preventDefault();
     // search searchbox input text from cosmeticsList, if cosmetic name includes the searchbox text, then display it
-    const foundCosmetic = db.cosmeticsList.find((cosmetic) =>
-      cosmetic.name.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    if (foundCosmetic) {
-      setCosmetic(foundCosmetic);
-      setView("default");
-    }
+    // const foundCosmetic = db.cosmeticsList.find((cosmetic) =>
+    //   cosmetic.name.toLowerCase().includes(e.target.value.toLowerCase())
+    // );
+    // if (foundCosmetic) {
+    //   setCosmetic(foundCosmetic);
+    //   setView("default");
+    // }
   };
 
 
+  const storeNewItemId = (new_id) =>{
+    setDbids(new_id);
+  }
+
+  // const startPage = () => {
+  //   cosmeticService.getall().then( (response) => {
+  //     console.log(response);
+  //   })
+  // }
+
+
+  // use this at startup only
+  // useEffect(()=>{
+  //     if(dbids){
+  //         return;
+      
+  //   }
+  //     console.log(dbids);
+  //     cosmeticService.getAll().then( (all) => {
+  //       console.log(all);
+  //     })
+  //     setDbids("cha");
+
+
+
+    
+  //   console.log(dbids);
+
+  // },[dbids])
 
   useEffect(() => {
-    /*cosmeticService.getAll().then((initialCosmetics) => {
-      console.log(initialCosmetics);
-      setCosmeticsList(initialCosmetics);
-    });*/
-    console.log(
-      "Read the cosmetic with id == 0 from db to initialize frontpage"
-    );
-    cosmeticService.getOne(0).then((cosmetic) => {
-      setCosmetic(cosmetic);
-    });
+    if(dbids.length === 0){
+      console.log(" run startup procedure");
+      cosmeticService.getAll().then((initialCosmetics) => {
+        console.log(initialCosmetics);
+        // setCosmeticsList(initialCosmetics);
+      });
+    }
+
+  
+
+    // console.log(
+    //   "Read the cosmetic with id == 0 from db to initialize frontpage"
+    //   );
+    // cosmeticService.getOne(0).then((cosmetic) => {
+    //   setCosmetic(cosmetic);
+    // });
+    
     const loggedUserJSON = window.localStorage.getItem(
       "cosmeticAppLoggedInUser"
     );
@@ -154,7 +194,7 @@ function App() {
           Add Entry
         </button>
 
-        {view === "all" && <DisplayAll all_cosmetics={db.cosmeticsList} />}
+        {/* {view === "all" && <DisplayAll all_cosmetics={db.cosmeticsList} />} */}
         {view === "default" && <Cosmetic cosmetic={cosmetic} />}
         {view === "add" && <NewEntry />}
         {view === "clear" && (
