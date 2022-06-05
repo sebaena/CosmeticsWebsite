@@ -1,8 +1,5 @@
 import axios from "axios";
 const baseUrl = process.env.REACT_APP_URL + "api/cosmetics";
-<<<<<<< HEAD
-// const baseUrl = "/api/cosmetics";
-=======
 //const baseUrl = "/api/cosmetics";
 
 let token = null
@@ -10,7 +7,6 @@ let token = null
 const setToken = newToken => {
   token = `bearer ${newToken}`
 }
->>>>>>> c58ba5539ba18ee5cf8feb2919a5513ce35f7655
 
 const getAll = () => {
   const request = axios.get(baseUrl);
