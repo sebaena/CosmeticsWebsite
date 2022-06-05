@@ -5,7 +5,7 @@ import NewEntry from "./components/NewEntry";
 import DisplayAll from "./components/DisplayAll";
 import cosmeticService from "./services/cosmetic";
 
-var db = require("./testdata/db.json");
+// var db = require("./testdata/db.json");
 
 function App() {
   const [cosmetic, setCosmetic] = useState();
@@ -14,8 +14,12 @@ function App() {
   const [entry, setEntry] = useState(false);
   const [searchName, setSearchName] = useState("");
 
+  // store ids that are stored in mongodb. Needed for "next item" functionality
+  const [ids, setIds] = useState([]);
+
   const nextItem = () => {
-    itemIndex == db.cosmeticsList.length - 1
+    // itemIndex == db.cosmeticsList.length - 1
+    itemIndex == ids.length - 1
       ? setItemIndex(0)
       : setItemIndex(itemIndex + 1);
     setCosmetic(db.cosmeticsList[itemIndex]);
@@ -35,6 +39,8 @@ function App() {
       setView("default")
     }
   };
+
+
 
   useEffect(() => {
     /*cosmeticService.getAll().then((initialCosmetics) => {
