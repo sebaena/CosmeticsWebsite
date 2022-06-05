@@ -1,6 +1,16 @@
+const jwt = require('jsonwebtoken')
 
 const cosmeticsRouter = require("express").Router();
 const Cosmetic = require("../models/cosmetic");
+const User = require("../models/user");
+
+const getTokenFrom = request => {
+  const authorization = request.get('authorization')
+  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    return authorization.substring(7)
+  }
+  return null
+}
 
 cosmeticsRouter.get("/", async (request, response) => {
   const cosmetics = await Cosmetic.find({});
@@ -18,6 +28,16 @@ cosmeticsRouter.get("/:id", async (request, response) => {
 
 cosmeticsRouter.post("/", async (request, response) => {
   const body = request.body;
+  // when user logged in, frontend will receive a token from server
+  // get the token from frontend request
+  // if token exists then user is able to create new cosmetics
+  const token = getTokenFrom(request);
+  const decodedToken = jwt.verify(token, process.env.SECRET);
+  if(!decodedToken.username){
+    return response.status(400).json({error: "token is invalid"});
+  }
+  const user = await User.findOne({username: username});
+
   if (body.name == undefined) {
     return response.status(400).json({ error: "Name missing" });
   }
