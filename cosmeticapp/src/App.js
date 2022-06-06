@@ -24,13 +24,14 @@ function App() {
   const [user, setUser] = useState(null);
 
   const nextItem = () => {
-    console.log("holaaa");
-    // itemIndex == db.cosmeticsList.length - 1
-    // itemIndex == ids.length - 1
-    //   ? setItemIndex(0)
-    //   : setItemIndex(itemIndex + 1);
+    console.log("dbids", dbids);
+
+    cosmeticService.getOne(dbids[itemIndex]).then(data =>setCosmetic(data));
+    itemIndex === dbids.length - 1
+      ? setItemIndex(0)
+      : setItemIndex(itemIndex + 1);
     // setCosmetic(db.cosmeticsList[itemIndex]);
-    // setView("default");
+    setView("default");
   };
 
   // handle searchbox text changes
@@ -48,9 +49,7 @@ function App() {
   };
 
 
-  const storeNewItemId = (new_id) =>{
-    setDbids(new_id);
-  }
+
 
   // const startPage = () => {
   //   cosmeticService.getall().then( (response) => {
@@ -79,22 +78,32 @@ function App() {
   // },[dbids])
 
   useEffect(() => {
+
+    // at boot up, store all ids in the data base. This only happens when the program starts
     if(dbids.length === 0){
+
+      var db_ids= [];
+
       console.log(" run startup procedure");
+
       cosmeticService.getAll().then((initialCosmetics) => {
-        console.log(initialCosmetics);
-        // setCosmeticsList(initialCosmetics);
+          initialCosmetics.map( all_cosmetics => {
+            db_ids = [...db_ids, all_cosmetics.id];
+            return db_ids;
+        })
+
+      // update all ids from the data base to local id buffer
+      setDbids(db_ids);
+
+      console.log(db_ids);
+
+      // select default display. could be any but first id is safer
+      cosmeticService.getOne(db_ids[0]).then(data =>setCosmetic(data));
+
       });
     }
 
-  
 
-    // console.log(
-    //   "Read the cosmetic with id == 0 from db to initialize frontpage"
-    //   );
-    // cosmeticService.getOne(0).then((cosmetic) => {
-    //   setCosmetic(cosmetic);
-    // });
     
     const loggedUserJSON = window.localStorage.getItem(
       "cosmeticAppLoggedInUser"
@@ -220,7 +229,8 @@ function App() {
       </label>
 
       <button onClick={nextItem}>Next Item</button>
-      {user === null ? (<Cosmetic cosmetic={cosmetic} />) : adminOnlyView()}
+     {/* {user === null ? (<Cosmetic cosmetic={cosmetic} />) : adminOnlyView()} */}
+     <Cosmetic cosmetic={cosmetic} />
     </div>
   );
 }

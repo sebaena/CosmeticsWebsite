@@ -18,7 +18,8 @@ cosmeticsRouter.get("/", async (request, response) => {
 });
 
 cosmeticsRouter.get("/:id", async (request, response) => {
-  const cosmetic = await Cosmetic.findOne({ "id": request.params.id });
+  // const cosmetic = await Cosmetic.findOne({ "id": request.params.id });
+  const cosmetic = await Cosmetic.findById(request.params.id);
   if (cosmetic) {
     response.json(cosmetic.toJSON());
   } else {
@@ -31,19 +32,23 @@ cosmeticsRouter.post("/", async (request, response) => {
   // when user logged in, frontend will receive a token from server
   // get the token from frontend request
   // if token exists then user is able to create new cosmetics
-  const token = getTokenFrom(request);
-  const decodedToken = jwt.verify(token, process.env.SECRET);
-  if(!decodedToken.username){
-    return response.status(400).json({error: "token is invalid"});
-  }
-  const user = await User.findOne({username: username});
 
-  if (body.name == undefined) {
-    return response.status(400).json({ error: "Name missing" });
-  }
+
+  // const token = getTokenFrom(request);
+  // const decodedToken = jwt.verify(token, process.env.SECRET);
+  // if(!decodedToken.username){
+  //   return response.status(400).json({error: "token is invalid"});
+  // }
+  // const user = await User.findOne({username: username});
+
+  // if (body.name == undefined) {
+  //   return response.status(400).json({ error: "Name missing" });
+  // }
 
   const cosmetic = new Cosmetic(body);
-  const savedCosmetic = await cosmetic.save();
+  const savedCosmetic = await cosmetic.save((err, new_cosmetic) => {
+    console.log(new_cosmetic.id);
+  });
 
   response.status(201).json(savedCosmetic);
 });

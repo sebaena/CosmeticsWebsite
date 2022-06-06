@@ -7,7 +7,18 @@ ingredientsRouter.get("/", async (request, response) => {
 });
 
 ingredientsRouter.get("/:id", async (request, response) => {
-  const ingredient = await Ingredient.findOne({ "id": request.params.id });
+  // const ingredient = await Ingredient.findOne({ "id": request.params.id });
+  const ingredient = await Ingredient.findById(request.params.id);
+  if (ingredient) {
+    response.json(ingredient.toJSON());
+  } else {
+    response.status(404).end();
+  }
+});
+
+ingredientsRouter.get("/:name", async (request, response) => {
+  const ingredient = await Ingredient.find({"name": request.params.name });
+  // const ingredient = await Ingredient.findById(request.params.id);
   if (ingredient) {
     response.json(ingredient.toJSON());
   } else {

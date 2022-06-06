@@ -2,31 +2,38 @@ import { useState, useEffect } from "react";
 import Ingredient from "./Ingredient";
 import ingredientService from "../services/ingredient";
 
-var db = require("../testdata/db.json");
+// var db = require("../testdata/db.json");
 
 const Cosmetic = (props) => {
   const { cosmetic } = props;
   const [ingredientsList, setIngredientsList] = useState();
   const [activeIngredient, setActiveIngredient] = useState({});
 
-  const searchIngredientFuc = (name) => {
-    const foundIngredientFuc = db.ingredientsList.find(
-      (ingredient) => ingredient.name === name
-    );
-    foundIngredientFuc
-      ? setActiveIngredient({
-          name: foundIngredientFuc.name,
-          function: foundIngredientFuc.function,
-        })
-      : setActiveIngredient({ name: name, function: "na" });
+
+  
+  const searchIngredientFuc = (name_s) => {
+    ingredientService.getOne(name_s).then(ingredient => console.log("INGG", ingredient));
+    // ingredientService.getAll().then(ingredient => console.log("All", ingredient));
+
+
+    
+    // const foundIngredientFuc = db.ingredientsList.find(
+    //   (ingredient) => ingredient.name === name
+    // );
+    // foundIngredientFuc
+    //   ? setActiveIngredient({
+    //       name: foundIngredientFuc.name,
+    //       function: foundIngredientFuc.function,
+    //     })
+    //   : setActiveIngredient({ name: name, function: "na" });
   };
 
-  /*useEffect(() => {
-    ingredientService.getAll().then((initialIngredients) => {
-      console.log(initialIngredients);
-      setIngredientsList(initialIngredients);
-    });
-  }, []);*/
+  // useEffect(() => {
+  //   ingredientService.getAll().then((initialIngredients) => {
+  //     console.log(initialIngredients);
+  //     setIngredientsList(initialIngredients);
+  //   });
+  // }, []);
 
   return cosmetic ? (
     <div>

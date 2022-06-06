@@ -13,6 +13,7 @@ const getAll = () => {
   return request.then((response) => response.data).catch(error => console.log("get all error"));
 };
 
+
 const getOne = (id) => {
   const request = axios.get(`${baseUrl}/${id}`);
   return request.then((response) => response.data).catch(error => console.log("get one  error"));

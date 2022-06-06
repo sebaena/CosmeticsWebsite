@@ -1,1 +1,1 @@
-GET http://localhost:3002/api/cosmetics
+GET http://localhost:3001/api/cosmetics
