@@ -7,10 +7,15 @@ const getAll = () => {
   return request.then((response) => response.data);
 };
 
-const getOne = (name) => {
-  const request = axios.get(`${baseUrl}/${name}`);
+const getOne = (id) => {
+  const request = axios.get(`${baseUrl}/${id}`);
   return request.then((response) => response.data);
 };
+
+const getByQuery = (query) => {
+  const request = axios.get(`${baseUrl}/?${query}`);
+  return request.then((response) => response.data);
+}
 
 const create = (newObject) => {
   const request = axios.post(baseUrl, newObject);
@@ -25,6 +30,7 @@ const update = (id, newObject) => {
 export default {
   getAll,
   getOne,
+  getByQuery,
   create,
   update,
 };

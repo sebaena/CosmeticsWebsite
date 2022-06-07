@@ -1,11 +1,12 @@
 const ingredientsRouter = require("express").Router();
+const { response } = require("express");
 const Ingredient = require("../models/ingredient");
 
 ingredientsRouter.get("/", async (request, response) => {
   //http://localhost:3001/api/ingredients/?name=Aqua
-  const {id, name} = request.query;
-  console.log(name);
-  const ingredients = await Ingredient.find({});
+  const query = request.query;
+  console.log(query);
+  const ingredients = await Ingredient.find(query);
   response.json(ingredients);
 });
 

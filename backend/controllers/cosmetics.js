@@ -13,7 +13,8 @@ const getTokenFrom = request => {
 }
 
 cosmeticsRouter.get("/", async (request, response) => {
-  const cosmetics = await Cosmetic.find({});
+  const query = request.query;
+  const cosmetics = await Cosmetic.find(query);
   response.json(cosmetics);
 });
 

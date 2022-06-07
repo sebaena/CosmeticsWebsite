@@ -13,6 +13,10 @@ const getAll = () => {
   return request.then((response) => response.data).catch(error => console.log("get all error"));
 };
 
+const getByQuery = (query) => {
+  const request = axios.get(`${baseUrl}/?${query}`);
+  return request.then((response) => response.data);
+}
 
 const getOne = (id) => {
   const request = axios.get(`${baseUrl}/${id}`);
@@ -35,6 +39,7 @@ const update = (id, newObject) => {
 export default {
   getAll,
   getOne,
+  getByQuery,
   create,
   update,
   setToken
