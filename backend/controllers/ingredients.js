@@ -4,6 +4,7 @@ const Ingredient = require("../models/ingredient");
 
 ingredientsRouter.get("/", async (request, response) => {
   //http://localhost:3001/api/ingredients/?name=Aqua
+  console.log("the query is here!")
   const query = request.query;
   console.log(query);
   const ingredients = await Ingredient.find(query);

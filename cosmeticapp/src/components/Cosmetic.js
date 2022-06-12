@@ -6,34 +6,25 @@ import ingredientService from "../services/ingredient";
 
 const Cosmetic = (props) => {
   const { cosmetic } = props;
-  const [ingredientsList, setIngredientsList] = useState();
+  // const [ingredientsList, setIngredientsList] = useState();
   const [activeIngredient, setActiveIngredient] = useState({});
 
 
   
   const searchIngredientFuc = (name_s) => {
-    ingredientService.getOne(name_s).then(ingredient => console.log("INGG", ingredient));
-    // ingredientService.getAll().then(ingredient => console.log("All", ingredient));
+    ingredientService.getByQuery(name_s).then(ingredient => {
+      setActiveIngredient({ 
+              name: ingredient[0].name,
+              function: ingredient[0].function,
+            });
+
+    });
 
 
-    
-    // const foundIngredientFuc = db.ingredientsList.find(
-    //   (ingredient) => ingredient.name === name
-    // );
-    // foundIngredientFuc
-    //   ? setActiveIngredient({
-    //       name: foundIngredientFuc.name,
-    //       function: foundIngredientFuc.function,
-    //     })
-    //   : setActiveIngredient({ name: name, function: "na" });
   };
 
-  // useEffect(() => {
-  //   ingredientService.getAll().then((initialIngredients) => {
-  //     console.log(initialIngredients);
-  //     setIngredientsList(initialIngredients);
-  //   });
-  // }, []);
+  // re-render whenever active ingredient changes
+  useEffect(() => {}, [activeIngredient]);
 
   return cosmetic ? (
     <div>

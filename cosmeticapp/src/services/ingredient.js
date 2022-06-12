@@ -13,9 +13,13 @@ const getOne = (id) => {
 };
 
 const getByQuery = (query) => {
-  const request = axios.get(`${baseUrl}/?${query}`);
+  const request = axios.get(baseUrl, {params: {name: query}});
   return request.then((response) => response.data);
 }
+// const getByQuery = (query) => {
+//   const request = axios.get(`${baseUrl}/?${query}`);
+//   return request.then((response) => response.data);
+// }
 
 const create = (newObject) => {
   const request = axios.post(baseUrl, newObject);
