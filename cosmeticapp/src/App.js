@@ -61,59 +61,42 @@ function App() {
 
 
 
-  // const startPage = () => {
-  //   cosmeticService.getall().then( (response) => {
-  //     console.log(response);
-  //   })
-  // }
+  const initializePage = () => {
+    var db_ids= [];
 
+    console.log(" run startup procedure");
 
-  // use this at startup only
-  // useEffect(()=>{
-  //     if(dbids){
-  //         return;
-      
-  //   }
-  //     console.log(dbids);
-  //     cosmeticService.getAll().then( (all) => {
-  //       console.log(all);
-  //     })
-  //     setDbids("cha");
+    // store locally the name and id of items in the data base. This must be updated when new items are added 
+    cosmeticService.getAll().then((initialCosmetics) => {
 
+      initialCosmetics.map( all_cosmetics => {
+        console.log("initialCosmetics", initialCosmetics);
+        db_ids = [...db_ids, {id:all_cosmetics.id, name: all_cosmetics.name.toLowerCase()}];
+        return db_ids;
+      })
 
+      // update all ids from the data base to local id buffer
+      setDbids(db_ids);
 
+      // select default display. could be any but first id is easier. use local array instead of hook to avoid delay issues
+      cosmeticService.getOne(db_ids[0].id).then(data =>setCosmetic(data));
+
+    });
+
+  // increment item index counter to take into account the startup
+  setItemIndex(1);
     
-  //   console.log(dbids);
+}
 
-  // },[dbids])
+
 
   useEffect(() => {
 
     // at boot up, store all ids in the data base. This only happens when the program starts
     if(dbids.length === 0){
 
-      var db_ids= [];
-
-      console.log(" run startup procedure");
-
-      // store locally the name and id of items in the data base. This must be updated when new items are added 
-      cosmeticService.getAll().then((initialCosmetics) => {
-          initialCosmetics.map( all_cosmetics => {
-            console.log("initialCosmetics", initialCosmetics);
-            db_ids = [...db_ids, {id:all_cosmetics.id, name: all_cosmetics.name.toLowerCase()}];
-            return db_ids;
-        })
-
-      // update all ids from the data base to local id buffer
-      setDbids(db_ids);
-
-      // select default display. could be any but first id is easier
-      cosmeticService.getOne(db_ids[0].id).then(data =>setCosmetic(data));
-      
-      // increment item index counter to take into account the startup
-      setItemIndex(1);
-
-      });
+      initializePage();
+    
     }
 
 
