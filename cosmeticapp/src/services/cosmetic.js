@@ -13,10 +13,21 @@ const getAll = () => {
   return request.then((response) => response.data).catch(error => console.log("get all error"));
 };
 
+// const getByQuery = (query) => {
+//   const request = axios.get(`${baseUrl}/?${query}`);
+//   return request.then((response) => response.data);
+// }
+
 const getByQuery = (query) => {
-  const request = axios.get(`${baseUrl}/?${query}`);
-  return request.then((response) => response.data);
+  const request = axios.get(baseUrl, {params: {name: query}});
+  return request.then((response) => response.data).catch(error => console.log("Quey error"));
 }
+
+
+
+
+
+
 
 const getOne = (id) => {
   const request = axios.get(`${baseUrl}/${id}`);

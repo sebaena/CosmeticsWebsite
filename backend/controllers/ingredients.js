@@ -4,7 +4,6 @@ const Ingredient = require("../models/ingredient");
 
 ingredientsRouter.get("/", async (request, response) => {
   //http://localhost:3001/api/ingredients/?name=Aqua
-  console.log("the query is here!")
   const query = request.query;
   console.log(query);
   const ingredients = await Ingredient.find(query);
@@ -21,15 +20,15 @@ ingredientsRouter.get("/:id", async (request, response) => {
   }
 });
 
-ingredientsRouter.get("/:name", async (request, response) => {
-  const ingredient = await Ingredient.find({"name": request.params.name });
-  // const ingredient = await Ingredient.findById(request.params.id);
-  if (ingredient) {
-    response.json(ingredient.toJSON());
-  } else {
-    response.status(404).end();
-  }
-});
+// ingredientsRouter.get("/:name", async (request, response) => {
+//   const ingredient = await Ingredient.find({"name": request.params.name });
+//   // const ingredient = await Ingredient.findById(request.params.id);
+//   if (ingredient) {
+//     response.json(ingredient.toJSON());
+//   } else {
+//     response.status(404).end();
+//   }
+// });
 
 ingredientsRouter.post("/", async (request, response) => {
   const body = request.body;

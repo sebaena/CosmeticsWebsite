@@ -15,7 +15,12 @@ const getTokenFrom = request => {
 cosmeticsRouter.get("/", async (request, response) => {
   const query = request.query;
   const cosmetics = await Cosmetic.find(query);
-  response.json(cosmetics);
+  console.log("cosmeticsssssssssssss= ", cosmetics);
+  if (cosmetics){
+    response.json(cosmetics);
+  } else {
+    response.status(404).end();
+  }
 });
 
 cosmeticsRouter.get("/:id", async (request, response) => {

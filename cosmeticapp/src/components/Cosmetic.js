@@ -17,15 +17,13 @@ const Cosmetic = (props) => {
               name: ingredient[0].name,
               function: ingredient[0].function,
             });
-
     });
-
-
   };
 
   // re-render whenever active ingredient changes
   useEffect(() => {}, [activeIngredient]);
 
+  
   return cosmetic ? (
     <div>
       <img src={cosmetic.picture} />

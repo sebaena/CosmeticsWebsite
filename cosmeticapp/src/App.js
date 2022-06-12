@@ -26,13 +26,18 @@ function App() {
   const nextItem = () => {
     console.log("dbids", dbids);
 
-    cosmeticService.getOne(dbids[itemIndex]).then(data =>setCosmetic(data));
+    cosmeticService.getOne(dbids[itemIndex].id).then(data =>setCosmetic(data));
     itemIndex === dbids.length - 1
       ? setItemIndex(0)
       : setItemIndex(itemIndex + 1);
-    // setCosmetic(db.cosmeticsList[itemIndex]);
     setView("default");
   };
+
+
+    // re-render whenever active ingredient changes
+    useEffect(() => {}, [cosmetic]);
+
+
 
   // handle searchbox text changes
   const handleSearchBoxChange = (e) => {
@@ -42,10 +47,15 @@ function App() {
     // const foundCosmetic = db.cosmeticsList.find((cosmetic) =>
     //   cosmetic.name.toLowerCase().includes(e.target.value.toLowerCase())
     // );
-    // if (foundCosmetic) {
-    //   setCosmetic(foundCosmetic);
-    //   setView("default");
-    // }
+
+    var matched = dbids.find(stored_objs => stored_objs.name.includes(e.target.value.toLowerCase()));
+
+    if(matched){
+      cosmeticService.getOne(matched.id).then(data =>setCosmetic(data));
+    }else{
+      console.log("item not found");
+    }
+
   };
 
 
@@ -86,19 +96,22 @@ function App() {
 
       console.log(" run startup procedure");
 
+      // store locally the name and id of items in the data base. This must be updated when new items are added 
       cosmeticService.getAll().then((initialCosmetics) => {
           initialCosmetics.map( all_cosmetics => {
-            db_ids = [...db_ids, all_cosmetics.id];
+            console.log("initialCosmetics", initialCosmetics);
+            db_ids = [...db_ids, {id:all_cosmetics.id, name: all_cosmetics.name.toLowerCase()}];
             return db_ids;
         })
 
       // update all ids from the data base to local id buffer
       setDbids(db_ids);
 
-      console.log(db_ids);
-
-      // select default display. could be any but first id is safer
-      cosmeticService.getOne(db_ids[0]).then(data =>setCosmetic(data));
+      // select default display. could be any but first id is easier
+      cosmeticService.getOne(db_ids[0].id).then(data =>setCosmetic(data));
+      
+      // increment item index counter to take into account the startup
+      setItemIndex(1);
 
       });
     }
