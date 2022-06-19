@@ -5,6 +5,8 @@ import NewEntry from "./components/NewEntry";
 import DisplayAll from "./components/DisplayAll";
 import cosmeticService from "./services/cosmetic";
 import loginService from "./services/login";
+import { useDispatch } from "react-redux";
+import { createCosmetic } from './reducers/cosmeticReducer';
 
 // var db = require("./testdata/db.json");
 
@@ -14,6 +16,8 @@ function App() {
   const [view, setView] = useState("default");
   const [entry, setEntry] = useState(false);
   const [searchName, setSearchName] = useState("");
+
+  const dispatch = useDispatch();
 
   // keep all _id returned from the db 
   const [dbids, setDbids] = useState([]);
@@ -25,6 +29,8 @@ function App() {
 
   const nextItem = () => {
     console.log("dbids", dbids);
+
+    dispatch(createCosmetic());
 
     cosmeticService.getOne(dbids[itemIndex].id).then(data =>setCosmetic(data));
     itemIndex === dbids.length - 1
