@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import Ingredient from "./Ingredient";
 import ingredientService from "../services/ingredient";
 
+import { useDispatch } from "react-redux";
+import { createCosmetic } from "../reducers/cosmeticReducer";
+
 // var db = require("../testdata/db.json");
 
 const Cosmetic = (props) => {
@@ -9,21 +12,21 @@ const Cosmetic = (props) => {
   // const [ingredientsList, setIngredientsList] = useState();
   const [activeIngredient, setActiveIngredient] = useState({});
 
+  const dispatch = useDispatch();
+  dispatch(createCosmetic());
 
-  
   const searchIngredientFuc = (name_s) => {
-    ingredientService.getByQuery(name_s).then(ingredient => {
-      setActiveIngredient({ 
-              name: ingredient[0].name,
-              function: ingredient[0].function,
-            });
+    ingredientService.getByQuery(name_s).then((ingredient) => {
+      setActiveIngredient({
+        name: ingredient[0].name,
+        function: ingredient[0].function,
+      });
     });
   };
 
   // re-render whenever active ingredient changes
   useEffect(() => {}, [activeIngredient]);
 
-  
   return cosmetic ? (
     <div>
       <img src={cosmetic.picture} />
