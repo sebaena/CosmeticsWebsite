@@ -3,7 +3,6 @@ import Ingredient from "./Ingredient";
 import ingredientService from "../services/ingredient";
 
 import { useDispatch } from "react-redux";
-import { createCosmetic } from "../reducers/cosmeticReducer";
 
 // var db = require("../testdata/db.json");
 
@@ -12,8 +11,8 @@ const Cosmetic = (props) => {
   // const [ingredientsList, setIngredientsList] = useState();
   const [activeIngredient, setActiveIngredient] = useState({});
 
-  const dispatch = useDispatch();
-  dispatch(createCosmetic());
+  //const dispatch = useDispatch();
+  //dispatch(createCosmetic());
 
   const searchIngredientFuc = (name_s) => {
     ingredientService.getByQuery(name_s).then((ingredient) => {
