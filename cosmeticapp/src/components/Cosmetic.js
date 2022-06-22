@@ -3,17 +3,23 @@ import Ingredient from "./Ingredient";
 import ingredientService from "../services/ingredient";
 
 import { useDispatch } from "react-redux";
+import { useSelector } from 'react-redux'
 
 // var db = require("../testdata/db.json");
 
 const Cosmetic = (props) => {
-  const { cosmetic } = props;
+  // const { cosmetic } = props;
   // const [ingredientsList, setIngredientsList] = useState();
   const [activeIngredient, setActiveIngredient] = useState({});
 
-  //const dispatch = useDispatch();
-  //dispatch(createCosmetic());
-
+  const dispatch = useDispatch();
+  
+  // useEffect(() => {
+  //   dispatch(initializeCosmetics()); 
+  // },[dispatch]) 
+  
+  const currentCosmetic = useSelector((state)=> state.cosmetic.currentCosmetic);
+  
   const searchIngredientFuc = (name_s) => {
     ingredientService.getByQuery(name_s).then((ingredient) => {
       setActiveIngredient({
@@ -26,13 +32,13 @@ const Cosmetic = (props) => {
   // re-render whenever active ingredient changes
   useEffect(() => {}, [activeIngredient]);
 
-  return cosmetic ? (
+  return currentCosmetic ? (
     <div>
-      <img src={cosmetic.picture} />
-      <p>Cosmetic Name : {cosmetic.name}</p>
+      <img src={currentCosmetic.picture} />
+      <p>Cosmetic Name : {currentCosmetic.name}</p>
       <p>ingredients:</p>
-      <ul>
-        {cosmetic.ingredients.map((ingredient) => (
+      {/* <ul>
+        {currentCosmetic.ingredients.map((ingredient) => (
           // TODO: <li> click event should pass ingredient name to another component, this component can search and display what does this ingredient do
           <li
             key={ingredient.name}
@@ -41,7 +47,7 @@ const Cosmetic = (props) => {
             {ingredient.name}
           </li>
         ))}
-      </ul>
+      </ul> */}
       <Ingredient ingredient={activeIngredient} />
     </div>
   ) : (

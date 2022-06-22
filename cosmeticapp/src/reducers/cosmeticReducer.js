@@ -1,74 +1,66 @@
 import { createSlice } from "@reduxjs/toolkit";
 import cosmeticService from "../services/cosmetic";
 
-
-
-// const initialState = {
-//   _id: "625da774913c95013ab4b432",
-//   name: "Lumene Nordic Hydra Cream",
-//   picture: "pictures/lumene_nordic_hydra_cream.jpeg",
-//   ingredients: [
-//     {
-//       name: "Aqua",
-//     },
-//     {
-//       name: "Caprylic",
-//     },
-//     {
-//       name: "Shea Butter",
-//     },
-//     {
-//       name: "Hydrogenated Polydecene",
-//     },
-//     {
-//       name: "Propanediol",
-//     },
-//   ],
-// };
-
 const cosmeticSlice = createSlice({
   name: "cosmetics",
-  // initialState: [],
   initialState: {
+    allCosmeticIds: [],
     currentCosmetic: {},
-    allCosmeticIds: []
   },
   reducers: {
-    // updateCosmetic(state, action) {
-    //   const newCosmetic = action.payload;
-    //   console.log("update cosmetic from redux");
-    //   console.log(newCosmetic);
-    //   state = newCosmetic;
-    //   return state;
-    // },
-
-    setCosmeticsIds(state, action) { 
-      return action.payload
-    }
+    initalCosmetics(state, action) {
+      return action.payload;
+    },
+    setAllCosmeticIds(state, action) {
+      return {
+        ...state,
+        allCosmeticIds: action.payload,
+      };
+    },
+    setCurrnetCosmetic(state, action) {
+      return {
+        ...state,
+        currentCosmetic: action.payload,
+      };
+    },
   },
 });
 
+export const initializeCosmetics = () => {
+  return async (dispatch) => {
+    const all_cosmetic_ids = await cosmeticService.getAllIds();
+    const first_cosmetic = await cosmeticService.getOne(all_cosmetic_ids[0].id);
 
-export const initializeCosmetics = () =>{
-  return async dispatch =>{
-    const cosmetics = await cosmeticService.getAll()
+    const init_cosmetic = {
+      allCosmeticIds: all_cosmetic_ids,
+      currentCosmetic: first_cosmetic,
+    };
 
-    var cosmetics_cache = [];
+    dispatch(initalCosmetics(init_cosmetic));
+  };
+};
 
-    cosmetics.map((all_cosmetics) => {
-      cosmetics_cache = [...cosmetics_cache, { id: all_cosmetics.id, name: all_cosmetics.name.toLowerCase() }];
-      return cosmetics_cache;
+export const updateAllCosmeticIds = () => {
+  return async (dispatch) => {
+    const all_cosmetic_ids = await cosmeticService.getAllIds();
+    dispatch(setAllCosmeticIds(all_cosmetic_ids));
+  };
+};
+
+export const nextCosmetic = () => {
+  return async (dispatch, getState) => {
+    const { allCosmeticIds, currentCosmetic } = getState().cosmetic;
+    const index = allCosmeticIds.findIndex((idObject) => {
+      return idObject.id == currentCosmetic.id;
     });
+    const nextIndex = index == allCosmeticIds.length - 1 ? 0 : index + 1;
+    const next_cosmetic = await cosmeticService.getOne(
+      allCosmeticIds[nextIndex].id
+    );
+    dispatch(setCurrnetCosmetic(next_cosmetic));
+  };
+};
 
-    const first_cosmetic = await cosmeticService.getOne(cosmetics_cache[0].id);
-
-    const cos = { currentCosmetic:first_cosmetic,
-                  allCosmeticIds: cosmetics_cache
-                }
-    
-    dispatch(setCosmeticsIds(cos))
-  }
-}
-
-export const { updateCosmetic, setCosmeticsIds } = cosmeticSlice.actions;
+export const { initalCosmetics, setAllCosmeticIds, setCurrnetCosmetic } =
+  cosmeticSlice.actions;
 export default cosmeticSlice.reducer;

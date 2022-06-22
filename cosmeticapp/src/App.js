@@ -6,9 +6,14 @@ import DisplayAll from "./components/DisplayAll";
 import cosmeticService from "./services/cosmetic";
 import loginService from "./services/login";
 import { useDispatch } from "react-redux";
-import { useSelector } from 'react-redux'
-// import { updateCosmetic, initializeCosmetics } from "./reducers/cosmeticReducer";
-import { initializeCosmetics } from "./reducers/cosmeticReducer";
+import { useSelector } from "react-redux";
+import {
+  initializeCosmetics,
+  updateAllCosmeticIds,
+  updateCurrentIndex,
+  updateCurrentCosmetic,
+  nextCosmetic,
+} from "./reducers/cosmeticReducer";
 
 // var db = require("./testdata/db.json");
 
@@ -19,7 +24,6 @@ function App() {
   const [entry, setEntry] = useState(false);
   const [searchName, setSearchName] = useState("");
 
- 
   // keep all _id returned from the db
   // const [dbids, setDbids] = useState([]);
 
@@ -27,8 +31,6 @@ function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-
-
 
   // const nextItem = () => {
   //   // console.log("dbids", dbids);
@@ -44,11 +46,6 @@ function App() {
   //   //   : setItemIndex(itemIndex + 1);
   //   // setView("default");
   // };
-
-
-
-
-
 
   // re-render whenever active ingredient changes
   // useEffect(() => {}, [cosmetic]);
@@ -66,62 +63,42 @@ function App() {
     //   stored_objs.name.includes(e.target.value.toLowerCase())
     // );
 
-  //   if (matched) {
-  //     cosmeticService.getOne(matched.id).then((data) => {
-  //       setCosmetic(data);
-  //       // dispatch(updateCosmetic(data));
-  //     });
-  //   } else {
-  //     console.log("item not found");
-  //   }
-
-  
+    //   if (matched) {
+    //     cosmeticService.getOne(matched.id).then((data) => {
+    //       setCosmetic(data);
+    //       // dispatch(updateCosmetic(data));
+    //     });
+    //   } else {
+    //     console.log("item not found");
+    //   }
   };
 
-  
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
-    dispatch(initializeCosmetics()); 
-  },[dispatch]) 
+    dispatch(initializeCosmetics());
+  }, [dispatch]);
 
-  
-  const initial_cosmetic = useSelector((state)=> state.cosmetic.currentCosmetic);
-  
-  useEffect(() => {
-    setView("run");
-
-  },[initial_cosmetic]) 
-  
-  
-
+  // const currentCosmetic = useSelector((state) => state.cosmetic.currentCosmetic);
 
   const nextItem = async () => {
-    console.log("initial_cosmetic ",initial_cosmetic.ingredients );
-    // const next = await cosmeticService.getOne(initial_cosmetic[0].id);
-    // return next;
-  }
+    dispatch(nextCosmetic());
+  };
 
   // const nextItem = async () => {
   //   console.log("boooo",  initial_cosmetic);
   //   const next = await cosmeticService.getOne(initial_cosmetic[0].id);
   //   console.log("neeext ", next);
   //    return next
-    
+
   // }
-
-
 
   // const viewCosmetic = () => {
   //   console.log("boooo2", initial_cosmetic)
-    
+
   //   //  return await cosmeticService.getOne(initial_cosmetic[0]);
-    
+
   // }
-  
-
-
-
 
   // const initializePage = () => {
   //   // var db_ids = [];
@@ -130,7 +107,7 @@ function App() {
 
   //   // // store locally the name and id of items in the data base. This must be updated when new items are added
   //   // cosmeticService.getAll().then((initialCosmetics) => {
-      
+
   //   //   initialCosmetics.map((all_cosmetics) => {
   //   //     console.log("initialCosmetics", initialCosmetics);
   //   //     db_ids = [
@@ -174,7 +151,6 @@ function App() {
       cosmeticService.setToken(user.token);
     }
   }, []);
-
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -292,13 +268,11 @@ function App() {
 
       <button onClick={nextItem}>Next Item</button>
       {/* {user === null ? (<Cosmetic cosmetic={cosmetic} />) : adminOnlyView()} */}
-      {initial_cosmetic != null  && <Cosmetic cosmetic={initial_cosmetic} />}
+      {/* {initial_cosmetic != null  && <Cosmetic cosmetic={initial_cosmetic} />} */}
       {/* <Cosmetic cosmetic={initial_cosmetic} /> */}
+      <Cosmetic />
     </div>
   );
-
-
-  
 }
 
 export default App;
