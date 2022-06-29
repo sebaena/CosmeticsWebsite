@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import Ingredient from "./Ingredient";
+import Ingredient from "./IngredientsList";
+import SelectedIng from "./SelectedIngredient";
 import ingredientService from "../services/ingredient";
 
 import { useDispatch } from "react-redux";
@@ -37,18 +38,18 @@ const Cosmetic = (props) => {
       <img src={currentCosmetic.picture} />
       <p>Cosmetic Name : {currentCosmetic.name}</p>
       <p>ingredients:</p>
-      {/* <ul>
-        {currentCosmetic.ingredients.map((ingredient) => (
+      <ul>
+        {/* {currentCosmetic.ingredients.map((ingredient) => (
           // TODO: <li> click event should pass ingredient name to another component, this component can search and display what does this ingredient do
           <li
             key={ingredient.name}
-            onClick={() => searchIngredientFuc(ingredient.name)}
+            // onClick={() => searchIngredientFuc(ingredient.name)}
           >
             {ingredient.name}
           </li>
-        ))}
-      </ul> */}
-      <Ingredient ingredient={activeIngredient} />
+        ))} */}
+      </ul>
+      <Ingredient />
     </div>
   ) : (
     <div>Nothing to show</div>
