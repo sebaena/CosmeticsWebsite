@@ -40,6 +40,23 @@ export const initializeCosmetics = () => {
   };
 };
 
+
+export const findCosmetic = (id) => {
+  return async (dispatch) => {
+    
+    const found_cosmetic = await cosmeticService.getOne(id);
+
+    const cosmetic = {
+      currentCosmetic: found_cosmetic,
+    };
+
+    dispatch(setCurrnetCosmetic(cosmetic));
+  };
+};
+
+
+
+
 export const updateAllCosmeticIds = () => {
   return async (dispatch) => {
     const all_cosmetic_ids = await cosmeticService.getAllIds();
@@ -61,6 +78,5 @@ export const nextCosmetic = () => {
   };
 };
 
-export const { initalCosmetics, setAllCosmeticIds, setCurrnetCosmetic } =
-  cosmeticSlice.actions;
+export const { initalCosmetics, setAllCosmeticIds, setCurrnetCosmetic} =  cosmeticSlice.actions;
 export default cosmeticSlice.reducer;

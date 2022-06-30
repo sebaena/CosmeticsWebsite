@@ -1,6 +1,5 @@
 import axios from "axios";
 const baseUrl = process.env.REACT_APP_URL + "api/ingredients";
-//const baseUrl = "/api/ingredients";
 
 const getAll = () => {
   const request = axios.get(baseUrl);
@@ -16,10 +15,6 @@ const getByQuery = (query) => {
   const request = axios.get(baseUrl, {params: {name: query}});
   return request.then((response) => response.data);
 }
-// const getByQuery = (query) => {
-//   const request = axios.get(`${baseUrl}/?${query}`);
-//   return request.then((response) => response.data);
-// }
 
 const create = (newObject) => {
   const request = axios.post(baseUrl, newObject);
