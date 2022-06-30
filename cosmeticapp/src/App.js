@@ -15,6 +15,8 @@ import {
   nextCosmetic,
 } from "./reducers/cosmeticReducer";
 
+import {clearSelectedIngredient} from "./reducers/ingredientReducer"
+
 // var db = require("./testdata/db.json");
 
 function App() {
@@ -83,6 +85,7 @@ function App() {
 
   const nextItem = async () => {
     dispatch(nextCosmetic());
+    dispatch(clearSelectedIngredient());
   };
 
   // const nextItem = async () => {

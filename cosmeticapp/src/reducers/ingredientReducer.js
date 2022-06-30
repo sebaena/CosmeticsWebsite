@@ -13,6 +13,12 @@ const ingredientSlice = createSlice({
         selectedIngredient: action.payload
       };
     },
+
+    clearSelectedIngredient(){
+        return {
+            selectedIngredient:{} 
+        };
+    },
   },
 });
 
@@ -59,5 +65,5 @@ export const updateSelectedIngredient = (ingredient_name) => {
 //   };
 // };
 
-export const { setSelectedIngredient } = ingredientSlice.actions;
+export const { setSelectedIngredient, clearSelectedIngredient } = ingredientSlice.actions;
 export default ingredientSlice.reducer;

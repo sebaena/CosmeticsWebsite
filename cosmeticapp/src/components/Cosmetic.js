@@ -37,7 +37,7 @@ const Cosmetic = (props) => {
     <div>
       <img src={currentCosmetic.picture} />
       <p>Cosmetic Name : {currentCosmetic.name}</p>
-      <p>ingredients:</p>
+      {/* <p>ingredients:</p> */}
       <ul>
         {/* {currentCosmetic.ingredients.map((ingredient) => (
           // TODO: <li> click event should pass ingredient name to another component, this component can search and display what does this ingredient do

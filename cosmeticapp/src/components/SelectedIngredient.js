@@ -7,7 +7,6 @@ const SelectedIngredient = ()=> {
     const dispatch = useDispatch();
     const selected_ingredient = useSelector((state)=> state.ingredient.selectedIngredient[0]);
 
-    console.log("hola", selected_ingredient);
 
     if(selected_ingredient){
         return(
