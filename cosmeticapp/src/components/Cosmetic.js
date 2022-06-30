@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Ingredient from "./IngredientsList";
-import SelectedIng from "./SelectedIngredient";
+import SelectedIngredient from "./SelectedIngredient";
 import ingredientService from "../services/ingredient";
 
 import { useDispatch } from "react-redux";
@@ -50,6 +50,7 @@ const Cosmetic = (props) => {
         ))} */}
       </ul>
       <Ingredient />
+      <SelectedIngredient />
     </div>
   ) : (
     <div>Nothing to show</div>

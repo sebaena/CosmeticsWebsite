@@ -1,13 +1,16 @@
 
 import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
+import {updateSelectedIngredient} from "../reducers/ingredientReducer";
 
-const Ingredient = (props) => {
+// const Ingredient = (props) => {
+const Ingredient = () => {
   const dispatch = useDispatch();
   const currentIngredients = useSelector((state)=> state.cosmetic.currentCosmetic.ingredients);
 
   const searchIngredientFuc = (selected_ingredient) => {
-    console.log("shega hasta aca");
+    console.log("shega hasta aca", selected_ingredient);
+    dispatch(updateSelectedIngredient(selected_ingredient));
   };
 
 

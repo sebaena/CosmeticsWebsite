@@ -4,8 +4,10 @@ import App from "./App";
 import "./index.css";
 
 import cosmeticReducer from "./reducers/cosmeticReducer";
+import ingredientReducer from "./reducers/ingredientReducer";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
+import store from "./store.js"
 
 // import axios from 'axios'
 
@@ -15,11 +17,12 @@ import { configureStore } from "@reduxjs/toolkit";
 // const ingredientsListPromise = axios.get('http://localhost:3001/ingredientsList')
 // console.log(ingredientsListPromise)
 
-const store = configureStore({
-  reducer: {
-    cosmetic: cosmeticReducer,
-  }
-});
+// const store = configureStore({
+//   reducer: {
+//     cosmetic: cosmeticReducer,
+//     ingredient: ingredientReducer,
+//   }
+// });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
