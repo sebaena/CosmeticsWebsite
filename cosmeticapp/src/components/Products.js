@@ -54,18 +54,22 @@ const Products = () => {
   };
 
 return (
-    <div>
-        <label>
-        Search Cosmetic:
-        <input
-            type="text"
-            value={searchName}
-            onChange={(event) => handleSearchBoxChange(event)}
-        ></input>
-        </label>
+    <div >
+        <div className="search-bar">
+            <label >
+                <input
+                    type="text"
+                    placeholder=" Search "
+                    class="search-field"
+                    value={searchName}
+                    onChange={(event) => handleSearchBoxChange(event)}
+                ></input>
+            </label>
+                <i class="gg-search"></i>
+        </div>
 
-        <button onClick={nextItem}>Next Item</button>
         <Cosmetic />
+        <button className="button" onClick={nextItem}>Next Item</button>
     </div>
     );
 

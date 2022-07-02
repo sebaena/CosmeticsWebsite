@@ -19,7 +19,7 @@ function App() {
         <div className="navbar-menu">
           <Link className="navbar-link" to = "/"> Home </Link>
           <Link className="navbar-link" to = "/products"> Products </Link>
-          <Link className="navbar-link" to = "/signin"> SignIn </Link>
+          <Link className="navbar-link" to = "/signin"> Sign in </Link>
         </div>
       </nav>
       <Routes>
