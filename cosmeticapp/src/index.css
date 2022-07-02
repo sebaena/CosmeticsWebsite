@@ -1,5 +1,46 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+.navbar {
+  display: flex;
+  background-color: rgb(45, 12, 230);
+}
+
+.navbar-menu{
+  display: grid;
+  grid-template-columns: repeat(3, auto); 
+  grid-gap: 10px;
+  list-style: none;
+  text-align: center;
+  width: 50vw;
+  justify-content: end;
+  margin-right: 2rem;
+  background-color: rgb(45, 12, 230);
+  align-items: center;
+  font-size: 1rem;
+
+}
+
+.navbar-link{
+  
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+
+.navbar-link:hover{
+  background-color: rgba(89, 66, 221, 0.999);
+  border-radius: 4px;
+  transition: all 0.2s ease-out ;
+}
+
 li {
-  color: grey;
+  color: rgb(45, 12, 230);;
   padding-top: 3px;
   font-size: 15px;
 }
