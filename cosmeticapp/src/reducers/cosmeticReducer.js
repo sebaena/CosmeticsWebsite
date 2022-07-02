@@ -17,12 +17,14 @@ const cosmeticSlice = createSlice({
         allCosmeticIds: action.payload,
       };
     },
+
     setCurrnetCosmetic(state, action) {
       return {
         ...state,
         currentCosmetic: action.payload,
       };
     },
+   
   },
 });
 
@@ -40,22 +42,12 @@ export const initializeCosmetics = () => {
   };
 };
 
-
 export const findCosmetic = (id) => {
   return async (dispatch) => {
-    
     const found_cosmetic = await cosmeticService.getOne(id);
-
-    const cosmetic = {
-      currentCosmetic: found_cosmetic,
-    };
-
-    dispatch(setCurrnetCosmetic(cosmetic));
+    dispatch(setCurrnetCosmetic(found_cosmetic));
   };
 };
-
-
-
 
 export const updateAllCosmeticIds = () => {
   return async (dispatch) => {
