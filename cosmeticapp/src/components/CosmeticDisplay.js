@@ -7,7 +7,7 @@ const CosmeticDisplay = ()=> {
     return Object.keys(currentCosmetic).length > 0 ? (
         <div>
             <img src={currentCosmetic.picture} />
-            <p>Cosmetic Name : {currentCosmetic.name}</p>
+            <p className="cosmetic-title">{currentCosmetic.name}</p>
         </div>
     ):(<></>)
 }

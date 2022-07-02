@@ -6,7 +6,7 @@ import CosmeticDisplay from "./CosmeticDisplay";
 
 const Cosmetic = () => {
   return (
-    <div>
+    <div className="cosmetic">
       <CosmeticDisplay/>
       <Ingredient />
       <SelectedIngredient />
