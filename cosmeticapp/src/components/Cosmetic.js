@@ -6,10 +6,12 @@ import CosmeticDisplay from "./CosmeticDisplay";
 
 const Cosmetic = () => {
   return (
-    <div className="cosmetic">
-      <CosmeticDisplay/>
-      <Ingredient />
-      <SelectedIngredient />
+    <div className="cosmetic-wrapper">
+      <div className="cosmetic">
+        <CosmeticDisplay/>
+        <Ingredient />
+        <SelectedIngredient />
+      </div>
     </div>
   ) 
 

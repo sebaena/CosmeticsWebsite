@@ -60,12 +60,12 @@ return (
                 <input
                     type="text"
                     placeholder=" Search "
-                    class="search-field"
+                    className="search-field"
                     value={searchName}
                     onChange={(event) => handleSearchBoxChange(event)}
                 ></input>
             </label>
-                <i class="gg-search"></i>
+                <i className="gg-search"></i>
         </div>
 
         <Cosmetic />
