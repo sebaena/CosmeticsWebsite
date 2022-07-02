@@ -69,7 +69,13 @@ return (
         </div>
 
         <Cosmetic />
-        <button className="button" onClick={nextItem}>Next Item</button>
+        <div className="button-wrapper">
+            <button className="button" onClick={nextItem}>
+                <span>
+                    Next Item
+                </span>
+            </button>
+        </div>
     </div>
     );
 

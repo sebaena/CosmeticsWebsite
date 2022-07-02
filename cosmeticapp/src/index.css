@@ -100,25 +100,53 @@
   box-shadow: 0 1px 5px rgb(26, 5, 144);
 }
 
+.button-wrapper span{
+  position: relative;
+  z-index: 2;
+}
+
 .button{
-  background-color: rgba(47, 16, 221, 0.999);
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
+  display: block;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
   border-radius: 4rem;
+  text-decoration: none;
+  color: white;
+  border: 2px solid rgb(26, 5, 144);
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all .5s;
+  background: rgb(26, 5, 144);
+}
+
+.button:after{
+  border-radius: 4rem;
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  transition: all .35s;
+  background: white;
+  color: white;
 }
 
 .button:hover{
-  background-color: rgba(47, 16, 221, 0.999);
-  border-radius: 4rem;
   cursor: pointer;
-  transition: all 0.2s ease-out ;
-
+  color: rgb(26, 5, 144);
 }
+
+.button:hover:after{
+  color: rgb(26, 5, 144);
+  width: 100%;
+}
+
+
+
 
 li {
   color: rgb(26, 5, 144);;
