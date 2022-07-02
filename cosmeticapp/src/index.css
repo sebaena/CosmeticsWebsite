@@ -49,11 +49,21 @@
 
 .cosmetic{
   text-align: center;
+  align-content: center;
+  display:flex;
+  flex-direction: column;
+  padding: 20px 15px;
+  margin: 30px 10px;
+  max-width: 300px;
+  position:relative;
+  box-shadow: 0 5px 20px rgb(26, 5, 144);
+  transition: 0.3s ease-in-out;
 }
 
 
 .cosmetic-title{
   font-weight: bold;
+  font-size: large;
   color: rgb(26, 5, 144);
 }
 
