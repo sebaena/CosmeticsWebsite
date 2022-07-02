@@ -49,7 +49,7 @@
 
 .cosmetic-wrapper{
   align-content: center;
-  position:center;
+  /* position:center; */
   padding: 20px ;
   margin: 30px 15px;
 
@@ -65,7 +65,7 @@
   max-width: 400px;
   max-height: 1000px;
   /* height: 600px; */
-  position:relative;
+  /* position:relative; */
   box-shadow: 0 1px 5px rgb(26, 5, 144);
   transition: 0.3s ease-in-out;
 }
@@ -161,20 +161,32 @@
   width: 100%;
 }
 
+ 
+.ingredients-wrapper{
+  margin: 0 auto;
+} 
 
-
-
-li {
-  color: rgb(26, 5, 144);;
-  padding-top: 3px;
-  font-size: 15px;
-}
-
-li:hover {
+.button-ingredient{
+  background-color: #eee;
+  color: #444;
   cursor: pointer;
+  padding: 18px;
+  width: 20rem;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 17px;
+  
 }
 
-.ingredientFunc {  
-    font-style: italic;
-    font-weight: bold;
+.active, .button-ingredient:hover {
+  background-color: #ccc;
+}
+
+.sample-content {
+  padding: 0 18px;
+  font-size: 12px;
+ 
+  /* background-color: #f1f1f1; */
+  background-color: white;
 }

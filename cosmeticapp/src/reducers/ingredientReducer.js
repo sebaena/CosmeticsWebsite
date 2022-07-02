@@ -24,7 +24,6 @@ const ingredientSlice = createSlice({
 
 
 export const updateSelectedIngredient = (ingredient_name) => {
-    console.log("adentro de reducer", ingredient_name);
   return async (dispatch) => {
     const updated_ingredients = await ingredientService.getByQuery(ingredient_name);
     dispatch(setSelectedIngredient(updated_ingredients));
