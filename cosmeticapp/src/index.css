@@ -1,6 +1,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -8,7 +9,7 @@
 
 .navbar {
   display: flex;
-  background-color: rgb(45, 12, 230);
+  background-color: rgb(26, 5, 144);
 }
 
 .navbar-menu{
@@ -20,7 +21,7 @@
   width: 50vw;
   justify-content: end;
   margin-right: 2rem;
-  background-color: rgb(45, 12, 230);
+  background-color:rgb(26, 5, 144);
   align-items: center;
   font-size: 1rem;
 
@@ -30,17 +31,19 @@
   
   color: white;
   padding: 0.5rem 1rem;
+  
+  font-weight: bold;
   text-decoration: none;
 }
 
 .navbar-link:hover{
-  background-color: rgba(89, 66, 221, 0.999);
+  background-color: rgba(47, 16, 221, 0.999);
   border-radius: 4px;
   transition: all 0.2s ease-out ;
 }
 
 li {
-  color: rgb(45, 12, 230);;
+  color: rgb(26, 5, 144);;
   padding-top: 3px;
   font-size: 15px;
 }
