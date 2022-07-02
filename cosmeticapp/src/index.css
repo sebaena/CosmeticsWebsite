@@ -52,19 +52,17 @@
   position:center;
   padding: 20px ;
   margin: 30px 15px;
-  max-width: 3000px;
+  /* max-width: 3000px; */
 
 }
-
 
 .cosmetic{
   text-align: center;
   align-content: center;
   display:flex;
   flex-direction: column;
-  /* padding: 20px 15px; */
   padding: 20px ;
-  margin: 30px 15px;
+  margin: 0 auto;
   max-width: 300px;
   position:relative;
   box-shadow: 0 1px 5px rgb(26, 5, 144);
@@ -113,12 +111,15 @@
   box-shadow: 0 1px 5px rgb(26, 5, 144);
 }
 
+
+
 .button-wrapper span{
   position: relative;
   z-index: 2;
 }
 
 .button{
+  margin: 0 auto;
   display: block;
   width: 200px;
   height: 40px;
