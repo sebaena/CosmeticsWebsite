@@ -1,11 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import cosmeticService from "../services/cosmetic";
+import ingredientService from "../services/ingredient";
 
 const cosmeticSlice = createSlice({
   name: "cosmetics",
   initialState: {
     allCosmeticIds: [],
-    currentCosmetic: {},
+    currentCosmetic:
+    //  [
+    //   {selectedIngredient:{},},
+    //   {selectedIngredient:{},},
+    //   {selectedIngredient:{},},
+    //   {selectedIngredient:{},},
+    // ]
+    {selectedIngredient:{},}
   },
   reducers: {
     initalCosmetics(state, action) {
@@ -22,6 +30,17 @@ const cosmeticSlice = createSlice({
       return {
         ...state,
         currentCosmetic: action.payload,
+      };
+    },
+    setSelectedIngredient(state, action) {
+      return {
+        ...state,
+        selectedIngredient: action.payload
+      };
+    },
+    clearSelectedIngredient(){
+      return {
+          selectedIngredient:{} 
       };
     },
    
@@ -70,5 +89,13 @@ export const nextCosmetic = () => {
   };
 };
 
-export const { initalCosmetics, setAllCosmeticIds, setCurrnetCosmetic} =  cosmeticSlice.actions;
+export const updateSelectedIngredient = (ingredient_name) => {
+  return async (dispatch) => {
+    const updated_ingredients = await ingredientService.getByQuery(ingredient_name);
+    dispatch(setSelectedIngredient(updated_ingredients));
+  };
+};
+
+
+export const { initalCosmetics, setAllCosmeticIds, setCurrnetCosmetic, setSelectedIngredient, clearSelectedIngredient} =  cosmeticSlice.actions;
 export default cosmeticSlice.reducer;

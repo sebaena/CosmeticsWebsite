@@ -3,7 +3,8 @@ import SelectedIngredient from "./SelectedIngredient";
 import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
 import {useState} from 'react';
-import {updateSelectedIngredient} from "../reducers/ingredientReducer";
+// import {updateSelectedIngredient} from "../reducers/ingredientReducer";
+import {updateSelectedIngredient} from "../reducers/cosmeticReducer";
 
 const Ingredient = () => {
   const dispatch = useDispatch();

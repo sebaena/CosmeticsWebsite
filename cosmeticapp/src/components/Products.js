@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Cosmetic from "./Cosmetic";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import {clearSelectedIngredient} from "../reducers/ingredientReducer"
+// import {clearSelectedIngredient} from "../reducers/ingredientReducer"
 
 import {
     initializeCosmetics,
@@ -12,6 +12,7 @@ import {
     updateCurrentCosmetic,
     nextCosmetic,
     findCosmetic,
+    clearSelectedIngredient,
   } from "../reducers/cosmeticReducer";
 
 

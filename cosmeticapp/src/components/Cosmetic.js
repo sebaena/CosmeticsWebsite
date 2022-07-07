@@ -10,6 +10,18 @@ const Cosmetic = () => {
         <CosmeticDisplay />
         <Ingredient />
       </div>
+      <div className="cosmetic">
+        <CosmeticDisplay />
+        <Ingredient />
+      </div>
+      <div className="cosmetic">
+        <CosmeticDisplay />
+        <Ingredient />
+      </div>
+      <div className="cosmetic">
+        <CosmeticDisplay />
+        <Ingredient />
+      </div>
     </div>
   ) 
 

@@ -7,7 +7,7 @@ import ingredientReducer from './reducers/ingredientReducer'
 const store = configureStore({
   reducer: {
     cosmetic: cosmeticReducer,
-    ingredient: ingredientReducer,
+    // ingredient: ingredientReducer,
   },
 })
 

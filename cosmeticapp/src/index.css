@@ -48,10 +48,12 @@
 
 
 .cosmetic-wrapper{
-  align-content: center;
+  display:grid;
+  grid-template-columns: repeat(4, auto);
+  /* align-content: center;
   /* position:center; */
-  padding: 20px ;
-  margin: 30px 15px;
+  /* padding: 20px ;
+  margin: 30px 15px; */
 
 }
 
