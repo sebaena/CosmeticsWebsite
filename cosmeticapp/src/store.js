@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import cosmeticReducer from './reducers/cosmeticReducer'
-import ingredientReducer from './reducers/ingredientReducer'
+// import ingredientReducer from './reducers/ingredientReducer'
 
 
 const store = configureStore({

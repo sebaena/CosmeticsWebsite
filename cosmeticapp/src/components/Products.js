@@ -33,8 +33,8 @@ const Products = () => {
 
 
     const nextItem = async () => {
+      dispatch(clearSelectedIngredient());
         dispatch(nextCosmetic());
-        dispatch(clearSelectedIngredient());
       };
 
 

@@ -16,7 +16,7 @@ import {
   findCosmetic,
 } from "./reducers/cosmeticReducer";
 
-import {clearSelectedIngredient} from "./reducers/ingredientReducer"
+// import {clearSelectedIngredient} from "./reducers/ingredientReducer"
 import {
   BrowserRouter as Router,
   Routes, Route, Link

@@ -13,7 +13,9 @@ const cosmeticSlice = createSlice({
     //   {selectedIngredient:{},},
     //   {selectedIngredient:{},},
     // ]
-    {selectedIngredient:{},}
+    {},
+    selected_ingredient: {},
+    // {}
   },
   reducers: {
     initalCosmetics(state, action) {
@@ -38,9 +40,10 @@ const cosmeticSlice = createSlice({
         selectedIngredient: action.payload
       };
     },
-    clearSelectedIngredient(){
+    clearSelectedIngredient(state){
       return {
-          selectedIngredient:{} 
+          ...state,
+          selectedIngredient:null
       };
     },
    
@@ -50,7 +53,10 @@ const cosmeticSlice = createSlice({
 export const initializeCosmetics = () => {
   return async (dispatch) => {
     const all_cosmetic_ids = await cosmeticService.getAllIds();
+    console.log("all cosmetics= ", all_cosmetic_ids);
     const first_cosmetic = await cosmeticService.getOne(all_cosmetic_ids[0].id);
+
+    console.log ("first cosmetic", first_cosmetic);
 
     const init_cosmetic = {
       allCosmeticIds: all_cosmetic_ids,
@@ -85,6 +91,7 @@ export const nextCosmetic = () => {
     const next_cosmetic = await cosmeticService.getOne(
       allCosmeticIds[nextIndex].id
     );
+    console.log("next cosmetic= ", next_cosmetic);
     dispatch(setCurrnetCosmetic(next_cosmetic));
   };
 };

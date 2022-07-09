@@ -12,6 +12,7 @@ const Ingredient = () => {
   const [clicked, setClicked] = useState(false);
 
   const setSelectedIngredient = ( ingredient, index) =>{
+    console.log("ingredientsList= ", ingredient)
     dispatch(updateSelectedIngredient(ingredient));
 
     if( clicked === index){

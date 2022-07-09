@@ -9,7 +9,7 @@ const CosmeticDisplay = ()=> {
             <img src={currentCosmetic.picture} />
             <p className="cosmetic-title">{currentCosmetic.name}</p>
         </div>
-    ):(<></>)
+    ):(<>blaaa</>)
 }
 
 export default CosmeticDisplay;
