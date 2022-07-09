@@ -50,10 +50,11 @@
 .cosmetic-wrapper{
   display:grid;
   grid-template-columns: repeat(4, auto);
+  gap: 1.5em 1em;
   /* align-content: center;
   /* position:center; */
-  /* padding: 20px ;
-  margin: 30px 15px; */
+  /* padding: 20px ; */
+  /* margin: 30px 15px 30px 15px;  */
 
 }
 
