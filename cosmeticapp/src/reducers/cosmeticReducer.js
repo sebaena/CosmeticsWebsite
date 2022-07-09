@@ -6,19 +6,20 @@ const cosmeticSlice = createSlice({
   name: "cosmetics",
   initialState: {
     allCosmeticIds: [],
-    currentCosmetic:
+    currentCosmetic: [],
     //  [
     //   {selectedIngredient:{},},
     //   {selectedIngredient:{},},
     //   {selectedIngredient:{},},
     //   {selectedIngredient:{},},
     // ]
-    {},
-    selected_ingredient: {},
+    // {},
+    // selected_ingredient: {},
     // {}
   },
   reducers: {
     initalCosmetics(state, action) {
+       
       return action.payload;
     },
     setAllCosmeticIds(state, action) {
@@ -34,6 +35,18 @@ const cosmeticSlice = createSlice({
         currentCosmetic: action.payload,
       };
     },
+
+
+    addCurrentCosmetics(state, action){
+      console.log("si entra")
+      state.currentCosmetic.push(action.payload);
+
+      //  return{
+      //    ...state,
+      // //   // currentCosmetic: [...state.currentCosmetic, action.payload]
+      //  };
+    },
+
     setSelectedIngredient(state, action) {
       return {
         ...state,
@@ -43,7 +56,7 @@ const cosmeticSlice = createSlice({
     clearSelectedIngredient(state){
       return {
           ...state,
-          selectedIngredient:null
+          selectedIngredient: null
       };
     },
    
@@ -60,7 +73,7 @@ export const initializeCosmetics = () => {
 
     const init_cosmetic = {
       allCosmeticIds: all_cosmetic_ids,
-      currentCosmetic: first_cosmetic,
+      currentCosmetic: [first_cosmetic],
     };
 
     dispatch(initalCosmetics(init_cosmetic));
@@ -92,9 +105,23 @@ export const nextCosmetic = () => {
       allCosmeticIds[nextIndex].id
     );
     console.log("next cosmetic= ", next_cosmetic);
-    dispatch(setCurrnetCosmetic(next_cosmetic));
+    dispatch(addCurrentCosmetics(next_cosmetic));
   };
 };
+// export const nextCosmetic = () => {
+//   return async (dispatch, getState) => {
+//     const { allCosmeticIds, currentCosmetic } = getState().cosmetic;
+//     const index = allCosmeticIds.findIndex((idObject) => {
+//       return idObject.id == currentCosmetic.id;
+//     });
+//     const nextIndex = index == allCosmeticIds.length - 1 ? 0 : index + 1;
+//     const next_cosmetic = await cosmeticService.getOne(
+//       allCosmeticIds[nextIndex].id
+//     );
+//     console.log("next cosmetic= ", next_cosmetic);
+//     dispatch(setCurrnetCosmetic(next_cosmetic));
+//   };
+// };
 
 export const updateSelectedIngredient = (ingredient_name) => {
   return async (dispatch) => {
@@ -104,5 +131,6 @@ export const updateSelectedIngredient = (ingredient_name) => {
 };
 
 
-export const { initalCosmetics, setAllCosmeticIds, setCurrnetCosmetic, setSelectedIngredient, clearSelectedIngredient} =  cosmeticSlice.actions;
+
+export const { initalCosmetics, setAllCosmeticIds, setCurrnetCosmetic, setSelectedIngredient, clearSelectedIngredient, addCurrentCosmetics} =  cosmeticSlice.actions;
 export default cosmeticSlice.reducer;

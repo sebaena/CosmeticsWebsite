@@ -1,15 +1,14 @@
 import { useSelector } from 'react-redux';
 
 
-const CosmeticDisplay = ()=> {
-    const currentCosmetic = useSelector((state)=> state.cosmetic.currentCosmetic);
-
-    return Object.keys(currentCosmetic).length > 0 ? (
+const CosmeticDisplay = ({current_cosmetic})=> {
+    return (
         <div>
-            <img src={currentCosmetic.picture} />
-            <p className="cosmetic-title">{currentCosmetic.name}</p>
+            <img src={current_cosmetic.picture} />
+            <p className="cosmetic-title">{current_cosmetic.name}</p>
         </div>
-    ):(<>blaaa</>)
+    )
 }
+
 
 export default CosmeticDisplay;
