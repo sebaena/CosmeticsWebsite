@@ -9,6 +9,7 @@ const cosmeticSlice = createSlice({
     currentCosmetic: [],
     selectedIngredient: {},
     selectedCosmeticName: "",
+    selectedCosmeticIndex: -1,
     indexCounter: 0,
   },
   reducers: {
@@ -48,6 +49,12 @@ const cosmeticSlice = createSlice({
       return {
         ...state,
         selectedCosmeticName: action.payload,
+      }
+    },
+    setSelectedCosmeticIndex(state, action){
+      return {
+        ...state,
+        selectedCosmeticIndex: action.payload,
       }
     },
     clearSelectedIngredient(state) {
@@ -145,12 +152,19 @@ export const updateSelectedCosmeticName = (cosmetic_name) => {
   }
 }
 
+export const updateSelectedCosmeticIndex = (index) => {
+  return async (dispatch) => {
+    dispatch(setSelectedCosmeticIndex(index));
+  }
+}
+
 export const {
   initalCosmetics,
   setAllCosmeticIds,
   setCurrnetCosmetic,
   setSelectedIngredient,
   setSelectedCosmeticName,
+  setSelectedCosmeticIndex,
   clearSelectedIngredient,
   addCurrentCosmetics,
   saveIndex,

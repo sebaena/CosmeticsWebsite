@@ -70,7 +70,7 @@ const Products = () => {
 
       <div className="cosmetic-wrapper">
         {currentCosmetics.map((cosmetic, index) => (
-          <Cosmetic key={index} cosmetic={cosmetic} />
+          <Cosmetic key={index} idx={index} cosmetic={cosmetic} />
         ))}
       </div>
 

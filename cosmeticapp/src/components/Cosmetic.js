@@ -11,6 +11,7 @@ import ingredientService from "../services/ingredient";
 
 import {
   updateSelectedCosmeticName,
+  updateSelectedCosmeticIndex,
   //initializeCosmetics,
   //updateAllCosmeticIds,
   //updateCurrentIndex,
@@ -23,6 +24,9 @@ import {
 
 const Cosmetic = (props) => {
   const dispatch = useDispatch();
+  const selectedCosmeticIndex = useSelector(
+    (state) => state.cosmetic.selectedCosmeticIndex
+  );
   const selectedCosmeticName = useSelector(
     (state) => state.cosmetic.selectedCosmeticName
   );
@@ -31,10 +35,15 @@ const Cosmetic = (props) => {
   );
 
   const selectedIngredientHandle = (ingredientName) => {
-    if (selectedIngredient && ingredientName == selectedIngredient.name && props.cosmetic.name == selectedCosmeticName){
+    console.log(props.idx)
+    if (
+      selectedIngredient &&
+      ingredientName == selectedIngredient.name &&
+      props.idx == selectedCosmeticIndex
+    ) {
       dispatch(updateSelectedIngredient(""));
     } else {
-      dispatch(updateSelectedCosmeticName(props.cosmetic.name));
+      dispatch(updateSelectedCosmeticIndex(props.idx));
       dispatch(updateSelectedIngredient(ingredientName));
     }
   };
@@ -56,7 +65,7 @@ const Cosmetic = (props) => {
             {ingredient.name}
           </button>
           {/* if seleteted ingredient name is the same as current one then display the feature */}
-          {props.cosmetic.name == selectedCosmeticName &&
+          {props.idx == selectedCosmeticIndex &&
           selectedIngredient &&
           selectedIngredient.name == ingredient.name ? (
             <div>{selectedIngredient.function}</div>
