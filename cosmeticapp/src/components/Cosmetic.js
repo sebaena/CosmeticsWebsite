@@ -14,7 +14,7 @@ const Cosmetic = (props) => {
   const [ingredientFeature, setIngredientFeature] = useState("");
 
   const selectedIngredientHandle = (ingredientName) => {
-    setSelectedIngredient(ingredientName);
+    ingredientName == selectedIngredient ? setSelectedIngredient("") : setSelectedIngredient(ingredientName);
     // get the ingredient function from the database
     ingredientService.getByQuery(ingredientName).then((returnedIngredient) => {
       setIngredientFeature(
