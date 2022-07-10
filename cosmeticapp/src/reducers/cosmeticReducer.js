@@ -7,6 +7,8 @@ const cosmeticSlice = createSlice({
   initialState: {
     allCosmeticIds: [],
     currentCosmetic: [],
+    selectedIngredient: {},
+    selectedCosmeticName: "",
     indexCounter: 0,
   },
   reducers: {
@@ -27,29 +29,33 @@ const cosmeticSlice = createSlice({
       };
     },
 
-
-    addCurrentCosmetics(state, action){
-      console.log("si entra", action.payload)
+    addCurrentCosmetics(state, action) {
+      console.log("si entra", action.payload);
       state.currentCosmetic.push(action.payload);
     },
 
-    saveIndex(state, action){
-      state.indexCounter = action.payload ;
+    saveIndex(state, action) {
+      state.indexCounter = action.payload;
     },
 
     setSelectedIngredient(state, action) {
       return {
         ...state,
-        selectedIngredient: action.payload
+        selectedIngredient: action.payload,
       };
     },
-    clearSelectedIngredient(state){
+    setSelectedCosmeticName(state, action){
       return {
-          ...state,
-          selectedIngredient: null
+        ...state,
+        selectedCosmeticName: action.payload,
+      }
+    },
+    clearSelectedIngredient(state) {
+      return {
+        ...state,
+        selectedIngredient: null,
       };
     },
-   
   },
 });
 
@@ -59,7 +65,7 @@ export const initializeCosmetics = () => {
     console.log("all cosmetics= ", all_cosmetic_ids);
     const first_cosmetic = await cosmeticService.getOne(all_cosmetic_ids[0].id);
 
-    console.log ("first cosmetic", first_cosmetic);
+    console.log("first cosmetic", first_cosmetic);
 
     const init_cosmetic = {
       allCosmeticIds: all_cosmetic_ids,
@@ -87,10 +93,12 @@ export const updateAllCosmeticIds = () => {
 
 export const nextCosmetic = () => {
   return async (dispatch, getState) => {
-      const { indexCounter, currentCosmetic, allCosmeticIds } = getState().cosmetic;
-      console.log("indexCounter indexCounter= ", indexCounter);
-      const nextIndex = indexCounter == allCosmeticIds.length - 1 ? 0 : indexCounter + 1;
-    
+    const { indexCounter, currentCosmetic, allCosmeticIds } =
+      getState().cosmetic;
+    console.log("indexCounter indexCounter= ", indexCounter);
+    const nextIndex =
+      indexCounter == allCosmeticIds.length - 1 ? 0 : indexCounter + 1;
+
     const next_cosmetic = await cosmeticService.getOne(
       allCosmeticIds[nextIndex].id
     );
@@ -116,13 +124,35 @@ export const nextCosmetic = () => {
 // };
 
 export const updateSelectedIngredient = (ingredient_name) => {
+  if (ingredient_name == "") {
+    return async (dispatch) => {
+      dispatch(setSelectedIngredient({}));
+    };
+  }
   return async (dispatch) => {
-    const updated_ingredients = await ingredientService.getByQuery(ingredient_name);
-    dispatch(setSelectedIngredient(updated_ingredients));
+    const updated_ingredients = await ingredientService.getByQuery(
+      ingredient_name
+    );
+    if(updated_ingredients.length){
+      dispatch(setSelectedIngredient(updated_ingredients[0]));
+    }
   };
 };
 
+export const updateSelectedCosmeticName = (cosmetic_name) => {
+  return async (dispatch) => {
+    dispatch(setSelectedCosmeticName(cosmetic_name));
+  }
+}
 
-
-export const { initalCosmetics, setAllCosmeticIds, setCurrnetCosmetic, setSelectedIngredient, clearSelectedIngredient, addCurrentCosmetics, saveIndex} =  cosmeticSlice.actions;
+export const {
+  initalCosmetics,
+  setAllCosmeticIds,
+  setCurrnetCosmetic,
+  setSelectedIngredient,
+  setSelectedCosmeticName,
+  clearSelectedIngredient,
+  addCurrentCosmetics,
+  saveIndex,
+} = cosmeticSlice.actions;
 export default cosmeticSlice.reducer;

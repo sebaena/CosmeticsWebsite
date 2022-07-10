@@ -1,28 +1,42 @@
 //import Ingredient from "./IngredientsList";
 //import CosmeticDisplay from "./CosmeticDisplay";
 //import SelectedIngredient from "./SelectedIngredient";
-//import { useDispatch } from "react-redux";
-//import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 //import ingredient from "../services/ingredient";
 //import { useState } from "react";
 
 import { useState } from "react";
 import ingredientService from "../services/ingredient";
 
+import {
+  updateSelectedCosmeticName,
+  //initializeCosmetics,
+  //updateAllCosmeticIds,
+  //updateCurrentIndex,
+  //updateCurrentCosmetic,
+  //nextCosmetic,
+  //findCosmetic,
+  //clearSelectedIngredient,
+  updateSelectedIngredient,
+} from "../reducers/cosmeticReducer";
+
 const Cosmetic = (props) => {
-  const [selectedIngredient, setSelectedIngredient] = useState("");
-  const [ingredientFeature, setIngredientFeature] = useState("");
+  const dispatch = useDispatch();
+  const selectedCosmeticName = useSelector(
+    (state) => state.cosmetic.selectedCosmeticName
+  );
+  const selectedIngredient = useSelector(
+    (state) => state.cosmetic.selectedIngredient
+  );
 
   const selectedIngredientHandle = (ingredientName) => {
-    ingredientName == selectedIngredient ? setSelectedIngredient("") : setSelectedIngredient(ingredientName);
-    // get the ingredient function from the database
-    ingredientService.getByQuery(ingredientName).then((returnedIngredient) => {
-      setIngredientFeature(
-        returnedIngredient.length
-          ? returnedIngredient[0].function
-          : "No information"
-      );
-    });
+    if (selectedIngredient && ingredientName == selectedIngredient.name && props.cosmetic.name == selectedCosmeticName){
+      dispatch(updateSelectedIngredient(""));
+    } else {
+      dispatch(updateSelectedCosmeticName(props.cosmetic.name));
+      dispatch(updateSelectedIngredient(ingredientName));
+    }
   };
 
   return (
@@ -42,8 +56,10 @@ const Cosmetic = (props) => {
             {ingredient.name}
           </button>
           {/* if seleteted ingredient name is the same as current one then display the feature */}
-          {selectedIngredient == ingredient.name ? (
-            <div>{ingredientFeature}</div>
+          {props.cosmetic.name == selectedCosmeticName &&
+          selectedIngredient &&
+          selectedIngredient.name == ingredient.name ? (
+            <div>{selectedIngredient.function}</div>
           ) : (
             <></>
           )}
