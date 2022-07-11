@@ -34,28 +34,30 @@ const cosmeticSlice = createSlice({
       console.log("si entra", action.payload);
       state.currentCosmetic.push(action.payload);
     },
-
     saveIndex(state, action) {
-      state.indexCounter = action.payload;
+      // state.indexCounter = action.payload;
+      return {
+        ...state,
+        indexCounter: action.payload,
+      };
     },
-
     setSelectedIngredient(state, action) {
       return {
         ...state,
         selectedIngredient: action.payload,
       };
     },
-    setSelectedCosmeticName(state, action){
+    setSelectedCosmeticName(state, action) {
       return {
         ...state,
         selectedCosmeticName: action.payload,
-      }
+      };
     },
-    setSelectedCosmeticIndex(state, action){
+    setSelectedCosmeticIndex(state, action) {
       return {
         ...state,
         selectedCosmeticIndex: action.payload,
-      }
+      };
     },
     clearSelectedIngredient(state) {
       return {
@@ -115,6 +117,24 @@ export const nextCosmetic = () => {
   };
 };
 
+export const nextSeveralCosmetics = (n) => {
+  return async (dispatch, getState) => {
+    for (let i = 0; i < n; i++) {
+      const { indexCounter, currentCosmetic, allCosmeticIds } =
+        getState().cosmetic;
+      console.log("indexCounter indexCounter= ", indexCounter);
+      const nextIndex =
+        indexCounter == allCosmeticIds.length - 1 ? 0 : indexCounter + 1;
+      const next_cosmetic = await cosmeticService.getOne(
+        allCosmeticIds[nextIndex].id
+      );
+
+      dispatch(saveIndex(nextIndex));
+      dispatch(addCurrentCosmetics(next_cosmetic));
+    }
+  };
+};
+
 // export const nextCosmetic = () => {
 //   return async (dispatch, getState) => {
 //     const { allCosmeticIds, currentCosmetic } = getState().cosmetic;
@@ -140,7 +160,7 @@ export const updateSelectedIngredient = (ingredient_name) => {
     const updated_ingredients = await ingredientService.getByQuery(
       ingredient_name
     );
-    if(updated_ingredients.length){
+    if (updated_ingredients.length) {
       dispatch(setSelectedIngredient(updated_ingredients[0]));
     }
   };

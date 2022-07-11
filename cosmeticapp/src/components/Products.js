@@ -11,6 +11,7 @@ import {
   //updateCurrentIndex,
   //updateCurrentCosmetic,
   nextCosmetic,
+  nextSeveralCosmetics,
   findCosmetic,
   //clearSelectedIngredient,
 } from "../reducers/cosmeticReducer";
@@ -20,6 +21,9 @@ const Products = () => {
   const [searchName, setSearchName] = useState("");
 
   const dispatch = useDispatch();
+  const cosmeticIndexCounter = useSelector(
+    (state) => state.cosmetic.indexCounter
+  );
   const currentCosmetics = useSelector(
     (state) => state.cosmetic.currentCosmetic
   );
@@ -32,9 +36,13 @@ const Products = () => {
     (state) => state.cosmetic.allCosmeticIds
   );
 
-  const nextItem = async () => {
+  const nextItemHandle = async () => {
     // dispatch(clearSelectedIngredient());
     dispatch(nextCosmetic());
+  };
+
+  const nextSeveralItemHandle = async (n) => {
+    dispatch(nextSeveralCosmetics(n));
   };
 
   // handle searchbox text changes
@@ -75,7 +83,12 @@ const Products = () => {
       </div>
 
       <div className="button-wrapper">
-        <button className="button" onClick={nextItem}>
+        <button
+          className="button"
+          onClick={() => {
+            nextSeveralItemHandle(4);
+          }}
+        >
           <span>More Items</span>
         </button>
       </div>
