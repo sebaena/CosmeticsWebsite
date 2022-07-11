@@ -146,17 +146,17 @@ export const updateSelectedIngredient = (ingredient_name) => {
   };
 };
 
-export const updateSelectedCosmeticName = (cosmetic_name) => {
-  return async (dispatch) => {
-    dispatch(setSelectedCosmeticName(cosmetic_name));
-  }
-}
+// export const updateSelectedCosmeticName = (cosmetic_name) => {
+//   return async (dispatch) => {
+//     dispatch(setSelectedCosmeticName(cosmetic_name));
+//   }
+// }
 
-export const updateSelectedCosmeticIndex = (index) => {
-  return async (dispatch) => {
-    dispatch(setSelectedCosmeticIndex(index));
-  }
-}
+// export const updateSelectedCosmeticIndex = (index) => {
+//   return async (dispatch) => {
+//     dispatch(setSelectedCosmeticIndex(index));
+//   }
+// }
 
 export const {
   initalCosmetics,

@@ -10,8 +10,8 @@ import { useState } from "react";
 import ingredientService from "../services/ingredient";
 
 import {
-  updateSelectedCosmeticName,
-  updateSelectedCosmeticIndex,
+  //updateSelectedCosmeticName,
+  //updateSelectedCosmeticIndex,
   //initializeCosmetics,
   //updateAllCosmeticIds,
   //updateCurrentIndex,
@@ -19,6 +19,7 @@ import {
   //nextCosmetic,
   //findCosmetic,
   //clearSelectedIngredient,
+  setSelectedCosmeticIndex,
   updateSelectedIngredient,
 } from "../reducers/cosmeticReducer";
 
@@ -43,7 +44,7 @@ const Cosmetic = (props) => {
     ) {
       dispatch(updateSelectedIngredient(""));
     } else {
-      dispatch(updateSelectedCosmeticIndex(props.idx));
+      dispatch(setSelectedCosmeticIndex(props.idx));
       dispatch(updateSelectedIngredient(ingredientName));
     }
   };
