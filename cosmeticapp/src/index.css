@@ -6,7 +6,6 @@
   margin: 0;
 }
 
-
 .navbar {
   display: flex;
   background-color: rgb(26, 5, 144);
@@ -48,9 +47,13 @@
 
 
 .cosmetic-wrapper{
-  display:grid;
-  grid-template-columns: repeat(4, auto);
-  gap: 1.5em 1em;
+  display: grid;
+  justify-content: center;
+  /* align-content: center; */
+  /* grid-template-columns: repeat(4, auto); */
+  grid-template-columns: repeat(4, 420px);
+  /* grid-row-gap: 5%; */
+  /* gap: 1.5em 1em; */
   /* align-content: center;
   /* position:center; */
   /* padding: 20px ; */
@@ -65,6 +68,7 @@
   flex-direction: column;
   padding: 20px ;
   margin: 0 auto;
+  margin-top: 20px;
   max-width: 400px;
   max-height: 1000px;
   /* height: 600px; */
@@ -118,9 +122,11 @@
 
 
 
-.button-wrapper span{
-  position: relative;
-  z-index: 2;
+.button-wrapper {
+  display: block;
+  margin-top: 20px;
+  /* position: relative; */
+  /* z-index: 2; */
 }
 
 .button{
@@ -151,20 +157,21 @@
   height: 100%;
   transition: all .35s;
   background: white;
-  color: white;
+  color: black;
 }
 
 .button:hover{
   cursor: pointer;
-  color: rgb(26, 5, 144);
+  /* background: white;
+  color: rgb(26, 5, 144); */
 }
 
 .button:hover:after{
   color: rgb(26, 5, 144);
+  content: "More Item";
   width: 100%;
 }
 
- 
 .ingredients-wrapper{
   margin: 0 auto;
 } 
@@ -179,7 +186,6 @@
   text-align: left;
   outline: none;
   font-size: 17px;
-  
 }
 
 .active, .button-ingredient:hover {

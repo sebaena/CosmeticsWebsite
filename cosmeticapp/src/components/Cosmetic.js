@@ -54,7 +54,7 @@ const Cosmetic = (props) => {
       <img src={props.cosmetic.picture} />
       {/* cosmetic title */}
       <p className="cosmetic-title">{props.cosmetic.name}</p>
-      {/* cosmetic ingredients list */}
+      {/* cosmetic ingredients list */}      
       {props.cosmetic.ingredients.map((ingredient, index) => (
         <div key={index}>
           <button
@@ -64,7 +64,6 @@ const Cosmetic = (props) => {
           >
             {ingredient.name}
           </button>
-          {/* if seleteted ingredient name is the same as current one then display the feature */}
           {props.idx == selectedCosmeticIndex &&
           selectedIngredient &&
           selectedIngredient.name == ingredient.name ? (
