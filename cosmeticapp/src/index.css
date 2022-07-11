@@ -168,7 +168,7 @@
 
 .button:hover:after{
   color: rgb(26, 5, 144);
-  content: "More Item";
+  content: "More Items";
   width: 100%;
 }
 

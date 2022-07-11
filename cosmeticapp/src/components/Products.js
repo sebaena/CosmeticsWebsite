@@ -76,7 +76,7 @@ const Products = () => {
 
       <div className="button-wrapper">
         <button className="button" onClick={nextItem}>
-          <span>More Item</span>
+          <span>More Items</span>
         </button>
       </div>
     </div>
