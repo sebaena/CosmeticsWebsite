@@ -1,35 +1,29 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import Cosmetic from "./Cosmetic";
 
-// import {clearSelectedIngredient} from "../reducers/ingredientReducer"
+import Cosmetic from "./Cosmetic";
 
 import {
   initializeCosmetics,
-  //updateAllCosmeticIds,
-  //updateCurrentIndex,
-  //updateCurrentCosmetic,
   nextCosmetic,
   nextSeveralCosmetics,
-  findCosmetic,
   findCosmeticByName,
   findCosmeticByIngredient,
+  setSearchedCosmeticName,
   setSearchedIngredientName,
-  //clearSelectedIngredient,
 } from "../reducers/cosmeticReducer";
-import cosmetic from "../services/cosmetic";
 
 const Products = () => {
-  const [searchCosmeticName, setSearchCosmeticName] = useState("");
-  // const [searchIngredientName, setSearchIngredientName] = useState("");
-
   const dispatch = useDispatch();
   const cosmeticIndexCounter = useSelector(
     (state) => state.cosmetic.indexCounter
   );
   const currentCosmetics = useSelector(
     (state) => state.cosmetic.currentCosmetic
+  );
+  const searchedCosmeticName = useSelector(
+    (state) => state.cosmetic.searchedCosmeticName
   );
   const searchedIngredientName = useSelector(
     (state) => state.cosmetic.searchedIngredientName
@@ -42,32 +36,24 @@ const Products = () => {
     (state) => state.cosmetic.allCosmeticIdsAndNames
   );
 
+  // add 1 extra cosmetic to currentCosmetics in cosmetic reducer
   const nextItemHandle = async () => {
-    // dispatch(clearSelectedIngredient());
     dispatch(nextCosmetic());
   };
 
+  // add several extra cosmetics to currentCosmetics in cosmetic reducer
   const nextSeveralItemHandle = async (n) => {
     dispatch(nextSeveralCosmetics(n));
   };
 
   // handle searchbox text changes
   const handleSearchCosmeticBoxChange = async (e) => {
-    setSearchCosmeticName(e.target.value);
+    dispatch(setSearchedCosmeticName(e.target.value));
     e.preventDefault();
-
     dispatch(findCosmeticByName(e.target.value));
-    /*var matched = all_cosmetics_ids_names_cache.find((stored_objs) =>
-      stored_objs.name.includes(e.target.value.toLowerCase())
-    );
-
-    if (matched) {
-      dispatch(findCosmetic(matched.id));
-    } else {
-      console.log("item not found");
-    }*/
   };
 
+  // handle searchbox text changes
   const handleSearchIngredientBoxChange = async (e) => {
     dispatch(setSearchedIngredientName(e.target.value));
     e.preventDefault();
@@ -76,18 +62,21 @@ const Products = () => {
 
   return (
     <div>
+      {/* TODO: maybe these can be put in different components, bit messy here */}
+      {/* search input for searching by cosmetic name */}
       <div className="search-bar">
         <label>
           <input
             type="text"
             placeholder=" Search Cosmetic "
             className="search-field"
-            value={searchCosmeticName}
+            value={searchedCosmeticName ? searchedCosmeticName : ""}
             onChange={(event) => handleSearchCosmeticBoxChange(event)}
           ></input>
         </label>
         <i className="gg-search"></i>
       </div>
+      {/* search input for searching by ingredient name*/}
       <div className="search-bar">
         <label>
           <input
@@ -100,6 +89,7 @@ const Products = () => {
         </label>
         <i className="gg-search"></i>
       </div>
+      {/* display cosmetic components */}
       <div className="cosmetic-wrapper">
         {currentCosmetics ? (
           currentCosmetics.map((cosmetic, index) => (
@@ -109,7 +99,7 @@ const Products = () => {
           <></>
         )}
       </div>
-
+      {/* button to display more cosmetics */}
       <div className="button-wrapper">
         <button
           className="button"

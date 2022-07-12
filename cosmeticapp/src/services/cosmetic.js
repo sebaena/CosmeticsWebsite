@@ -51,6 +51,7 @@ const getAllIdsAndNames = () => {
     .catch((error) => console.log("get all ids error"));
 };
 
+// request url example, http://localhost:3001/api/cosmetics/searchByName?name=Lumene
 const getByName = (name) => {
   const request = axios.get(baseUrl+'/searchByName', { params: { name: name } });
   console.log(request)
@@ -59,6 +60,7 @@ const getByName = (name) => {
     .catch((error) => console.log("Quey error"));
 };
 
+// request url example, http://localhost:3001/api/cosmetics/searchByIngredient?ingredient=shea
 const getByIngredient = (ingredient) => {
   const request = axios.get(baseUrl+'/searchByIngredient', { params: { ingredient: ingredient } });
   console.log(request)
@@ -67,6 +69,7 @@ const getByIngredient = (ingredient) => {
     .catch((error) => console.log("Quey error"));
 };
 
+// TODO: doesn't work
 const getByParams = (params) => {
   const request = axios.get(baseUrl, {params: params});
   return request

@@ -9,6 +9,7 @@ const cosmeticSlice = createSlice({
     currentCosmetic: [],
     selectedIngredient: {},
     selectedCosmeticIndex: -1,
+    searchedCosmeticName: "",
     searchedIngredientName: "",
     indexCounter: 0,
   },
@@ -22,14 +23,12 @@ const cosmeticSlice = createSlice({
         allCosmeticIdsAndNames: action.payload,
       };
     },
-
     setCurrnetCosmetic(state, action) {
       return {
         ...state,
         currentCosmetic: action.payload,
       };
     },
-
     addCurrentCosmetics(state, action) {
       console.log("si entra", action.payload);
       state.currentCosmetic.push(action.payload);
@@ -51,6 +50,12 @@ const cosmeticSlice = createSlice({
       return {
         ...state,
         selectedCosmeticIndex: action.payload,
+      };
+    },
+    setSearchedCosmeticName(state, action) {
+      return {
+        ...state,
+        searchedCosmeticName: action.payload,
       };
     },
     setSearchedIngredientName(state, action) {
@@ -211,6 +216,7 @@ export const {
   setSelectedIngredient,
   setSelectedCosmeticName,
   setSelectedCosmeticIndex,
+  setSearchedCosmeticName,
   setSearchedIngredientName,
   clearSelectedIngredient,
   addCurrentCosmetics,
