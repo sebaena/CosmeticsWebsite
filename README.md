@@ -45,10 +45,9 @@ We try to build a website for users to easily find the functions of the ingredie
 - /backend/utils --- for helper functions and middleware and config
 
 # TODO:
-0. error catch for promisese should be added
-1. ingredent function should be freshed if user changes product
-2. check and filter function in cosmetic componet should be in backend???
-6. to be continued ...
+1. contact page
+2. login, add entry, delete entry etc
+3. code cleanup
 
 # Released features:
 1. dynamic search cosmetics by name
@@ -61,4 +60,4 @@ We try to build a website for users to easily find the functions of the ingredie
 8. add ingredient REST functions
 9. connect backend with frontend
 10. connect to mango database
-11. added some tests 
+11. added some tests
