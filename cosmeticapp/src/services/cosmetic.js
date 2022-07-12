@@ -20,6 +20,30 @@ const getAllIds = () => {
   return request
     .then((response) => {
       const ids = response.data.map((cosmetic) => {
+        return { id: cosmetic.id};
+      });
+      return ids;
+    })
+    .catch((error) => console.log("get all ids error"));
+};
+
+const getAllNames = () => {
+  const request = axios.get(baseUrl);
+  return request
+    .then((response) => {
+      const ids = response.data.map((cosmetic) => {
+        return { name: cosmetic.name.toLowerCase() };
+      });
+      return ids;
+    })
+    .catch((error) => console.log("get all Names error"));
+};
+
+const getAllIdsAndNames = () => {
+  const request = axios.get(baseUrl);
+  return request
+    .then((response) => {
+      const ids = response.data.map((cosmetic) => {
         return { id: cosmetic.id, name: cosmetic.name.toLowerCase() };
       });
       return ids;
@@ -27,8 +51,16 @@ const getAllIds = () => {
     .catch((error) => console.log("get all ids error"));
 };
 
-const getByQuery = (query) => {
-  const request = axios.get(baseUrl, { params: { name: query } });
+const getByName = (name) => {
+  const request = axios.get(baseUrl+'/searchByName', { params: { name: name } });
+  console.log(request)
+  return request
+    .then((response) => response.data)
+    .catch((error) => console.log("Quey error"));
+};
+
+const getByParams = (params) => {
+  const request = axios.get(baseUrl, {params: params});
   return request
     .then((response) => response.data)
     .catch((error) => console.log("Quey error"));
@@ -61,8 +93,11 @@ const update = (id, newObject) => {
 export default {
   getAll,
   getAllIds,
+  getAllNames,
+  getAllIdsAndNames,
   getOne,
-  getByQuery,
+  getByName,
+  getByParams,
   create,
   update,
   setToken,

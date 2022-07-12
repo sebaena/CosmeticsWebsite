@@ -5,10 +5,9 @@ import ingredientService from "../services/ingredient";
 const cosmeticSlice = createSlice({
   name: "cosmetics",
   initialState: {
-    allCosmeticIds: [],
+    allCosmeticIdsAndNames: [],
     currentCosmetic: [],
     selectedIngredient: {},
-    selectedCosmeticName: "",
     selectedCosmeticIndex: -1,
     indexCounter: 0,
   },
@@ -16,10 +15,10 @@ const cosmeticSlice = createSlice({
     initalCosmetics(state, action) {
       return action.payload;
     },
-    setAllCosmeticIds(state, action) {
+    setAllCosmeticIdsAndNames(state, action) {
       return {
         ...state,
-        allCosmeticIds: action.payload,
+        allCosmeticIdsAndNames: action.payload,
       };
     },
 
@@ -47,12 +46,6 @@ const cosmeticSlice = createSlice({
         selectedIngredient: action.payload,
       };
     },
-    setSelectedCosmeticName(state, action) {
-      return {
-        ...state,
-        selectedCosmeticName: action.payload,
-      };
-    },
     setSelectedCosmeticIndex(state, action) {
       return {
         ...state,
@@ -70,14 +63,16 @@ const cosmeticSlice = createSlice({
 
 export const initializeCosmetics = () => {
   return async (dispatch) => {
-    const all_cosmetic_ids = await cosmeticService.getAllIds();
-    console.log("all cosmetics= ", all_cosmetic_ids);
-    const first_cosmetic = await cosmeticService.getOne(all_cosmetic_ids[0].id);
+    const all_cosmetic_ids_names = await cosmeticService.getAllIdsAndNames();
+    // console.log("all cosmetics= ", all_cosmetic_ids);
+    const first_cosmetic = await cosmeticService.getOne(
+      all_cosmetic_ids_names[0].id
+    );
 
     console.log("first cosmetic", first_cosmetic);
 
     const init_cosmetic = {
-      allCosmeticIds: all_cosmetic_ids,
+      allCosmeticIdsAndNames: all_cosmetic_ids_names,
       currentCosmetic: [first_cosmetic],
       indexCounter: 0,
     };
@@ -86,30 +81,41 @@ export const initializeCosmetics = () => {
   };
 };
 
-export const findCosmetic = (id) => {
+export const findCosmeticById = (id) => {
   return async (dispatch) => {
     const found_cosmetic = await cosmeticService.getOne(id);
     dispatch(setCurrnetCosmetic(found_cosmetic));
   };
 };
 
-export const updateAllCosmeticIds = () => {
+export const findCosmeticByName = (name) => {
   return async (dispatch) => {
-    const all_cosmetic_ids = await cosmeticService.getAllIds();
-    dispatch(setAllCosmeticIds(all_cosmetic_ids));
+    if (name.length < 2) {
+      dispatch(setCurrnetCosmetic([]));
+    } else {
+      const found_cosmetic = await cosmeticService.getByName(name);
+      dispatch(setCurrnetCosmetic(found_cosmetic));
+    }
+  };
+};
+
+export const updateAllCosmeticIdsAndNames = () => {
+  return async (dispatch) => {
+    const all_cosmetic_ids_names = await cosmeticService.getAllIdsAndNames();
+    dispatch(setAllCosmeticIds(all_cosmetic_ids_names));
   };
 };
 
 export const nextCosmetic = () => {
   return async (dispatch, getState) => {
-    const { indexCounter, currentCosmetic, allCosmeticIds } =
+    const { indexCounter, currentCosmetic, allCosmeticIdsAndNames } =
       getState().cosmetic;
     console.log("indexCounter indexCounter= ", indexCounter);
     const nextIndex =
-      indexCounter == allCosmeticIds.length - 1 ? 0 : indexCounter + 1;
+      indexCounter == allCosmeticIdsAndNames.length - 1 ? 0 : indexCounter + 1;
 
     const next_cosmetic = await cosmeticService.getOne(
-      allCosmeticIds[nextIndex].id
+      allCosmeticIdsAndNames[nextIndex].id
     );
     console.log("next cosmetic= ", next_cosmetic);
     dispatch(saveIndex(nextIndex));
@@ -120,13 +126,15 @@ export const nextCosmetic = () => {
 export const nextSeveralCosmetics = (n) => {
   return async (dispatch, getState) => {
     for (let i = 0; i < n; i++) {
-      const { indexCounter, currentCosmetic, allCosmeticIds } =
+      const { indexCounter, currentCosmetic, allCosmeticIdsAndNames } =
         getState().cosmetic;
       console.log("indexCounter indexCounter= ", indexCounter);
       const nextIndex =
-        indexCounter == allCosmeticIds.length - 1 ? 0 : indexCounter + 1;
+        indexCounter == allCosmeticIdsAndNames.length - 1
+          ? 0
+          : indexCounter + 1;
       const next_cosmetic = await cosmeticService.getOne(
-        allCosmeticIds[nextIndex].id
+        allCosmeticIdsAndNames[nextIndex].id
       );
 
       dispatch(saveIndex(nextIndex));

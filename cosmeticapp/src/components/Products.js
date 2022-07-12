@@ -13,6 +13,7 @@ import {
   nextCosmetic,
   nextSeveralCosmetics,
   findCosmetic,
+  findCosmeticByName,
   //clearSelectedIngredient,
 } from "../reducers/cosmeticReducer";
 import cosmetic from "../services/cosmetic";
@@ -32,8 +33,8 @@ const Products = () => {
     dispatch(initializeCosmetics());
   }, [dispatch]);
 
-  const all_cosmetics_cache = useSelector(
-    (state) => state.cosmetic.allCosmeticIds
+  const all_cosmetics_ids_names_cache = useSelector(
+    (state) => state.cosmetic.allCosmeticIdsAndNames
   );
 
   const nextItemHandle = async () => {
@@ -50,7 +51,8 @@ const Products = () => {
     setSearchName(e.target.value);
     e.preventDefault();
 
-    var matched = all_cosmetics_cache.find((stored_objs) =>
+    dispatch(findCosmeticByName(e.target.value));
+    /*var matched = all_cosmetics_ids_names_cache.find((stored_objs) =>
       stored_objs.name.includes(e.target.value.toLowerCase())
     );
 
@@ -58,7 +60,7 @@ const Products = () => {
       dispatch(findCosmetic(matched.id));
     } else {
       console.log("item not found");
-    }
+    }*/
   };
 
   return (
@@ -77,9 +79,13 @@ const Products = () => {
       </div>
 
       <div className="cosmetic-wrapper">
-        {currentCosmetics.map((cosmetic, index) => (
-          <Cosmetic key={index} idx={index} cosmetic={cosmetic} />
-        ))}
+        {currentCosmetics ? (
+          currentCosmetics.map((cosmetic, index) => (
+            <Cosmetic key={index} idx={index} cosmetic={cosmetic} />
+          ))
+        ) : (
+          <></>
+        )}
       </div>
 
       <div className="button-wrapper">
