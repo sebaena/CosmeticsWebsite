@@ -9,6 +9,7 @@ const cosmeticSlice = createSlice({
     currentCosmetic: [],
     selectedIngredient: {},
     selectedCosmeticIndex: -1,
+    searchedIngredientName: "",
     indexCounter: 0,
   },
   reducers: {
@@ -50,6 +51,12 @@ const cosmeticSlice = createSlice({
       return {
         ...state,
         selectedCosmeticIndex: action.payload,
+      };
+    },
+    setSearchedIngredientName(state, action) {
+      return {
+        ...state,
+        searchedIngredientName: action.payload,
       };
     },
     clearSelectedIngredient(state) {
@@ -94,6 +101,17 @@ export const findCosmeticByName = (name) => {
       dispatch(setCurrnetCosmetic([]));
     } else {
       const found_cosmetic = await cosmeticService.getByName(name);
+      dispatch(setCurrnetCosmetic(found_cosmetic));
+    }
+  };
+};
+
+export const findCosmeticByIngredient = (ingredient) => {
+  return async (dispatch) => {
+    if (ingredient.length < 2) {
+      dispatch(setCurrnetCosmetic([]));
+    } else {
+      const found_cosmetic = await cosmeticService.getByIngredient(ingredient);
       dispatch(setCurrnetCosmetic(found_cosmetic));
     }
   };
@@ -193,6 +211,7 @@ export const {
   setSelectedIngredient,
   setSelectedCosmeticName,
   setSelectedCosmeticIndex,
+  setSearchedIngredientName,
   clearSelectedIngredient,
   addCurrentCosmetics,
   saveIndex,

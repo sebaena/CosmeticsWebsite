@@ -1,21 +1,21 @@
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 
 const cosmeticsRouter = require("express").Router();
 const Cosmetic = require("../models/cosmetic");
 const User = require("../models/user");
 
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
+const getTokenFrom = (request) => {
+  const authorization = request.get("authorization");
+  if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
+    return authorization.substring(7);
   }
-  return null
-}
+  return null;
+};
 
 cosmeticsRouter.get("/", async (request, response) => {
   const query = request.query;
   const cosmetics = await Cosmetic.find(query);
-  if (cosmetics){
+  if (cosmetics) {
     response.json(cosmetics);
   } else {
     response.status(404).end();
@@ -25,8 +25,23 @@ cosmeticsRouter.get("/", async (request, response) => {
 cosmeticsRouter.get("/searchByName", async (request, response) => {
   const query = request.query;
   // const cosmetics = await Cosmetic.find({name: {$regex: query.name}});
-  const cosmetics = await Cosmetic.find({name: {'$regex' : query.name, '$options' : 'i'}});
-  if (cosmetics){
+  const cosmetics = await Cosmetic.find({
+    name: { $regex: query.name, $options: "i" },
+  });
+  if (cosmetics) {
+    response.json(cosmetics);
+  } else {
+    response.status(404).end();
+  }
+});
+
+cosmeticsRouter.get("/searchByIngredient", async (request, response) => {
+  const query = request.query;
+  console.log(query.name)
+  const cosmetics = await Cosmetic.find({
+    "ingredients.name": { $regex: query.ingredient, $options: "i" },
+  });
+  if (cosmetics) {
     response.json(cosmetics);
   } else {
     response.status(404).end();
@@ -49,7 +64,6 @@ cosmeticsRouter.post("/", async (request, response) => {
   // get the token from frontend request
   // if token exists then user is able to create new cosmetics
 
-
   // const token = getTokenFrom(request);
   // const decodedToken = jwt.verify(token, process.env.SECRET);
   // if(!decodedToken.username){
@@ -70,7 +84,7 @@ cosmeticsRouter.post("/", async (request, response) => {
 });
 
 cosmeticsRouter.delete("/:id", async (request, response) => {
-  await Cosmetic.findOneAndRemove({ "id": request.params.id });
+  await Cosmetic.findOneAndRemove({ id: request.params.id });
   response.status(204).end();
 });
 
@@ -79,7 +93,7 @@ cosmeticsRouter.put("/:id", async (request, response) => {
 
   const cosmetic = body;
   const updatedCosmetic = await Cosmetic.findOneAndUpdate(
-    { "id": request.params.id },
+    { id: request.params.id },
     cosmetic,
     { new: true }
   );

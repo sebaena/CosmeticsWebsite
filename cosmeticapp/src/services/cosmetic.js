@@ -59,6 +59,14 @@ const getByName = (name) => {
     .catch((error) => console.log("Quey error"));
 };
 
+const getByIngredient = (ingredient) => {
+  const request = axios.get(baseUrl+'/searchByIngredient', { params: { ingredient: ingredient } });
+  console.log(request)
+  return request
+    .then((response) => response.data)
+    .catch((error) => console.log("Quey error"));
+};
+
 const getByParams = (params) => {
   const request = axios.get(baseUrl, {params: params});
   return request
@@ -97,6 +105,7 @@ export default {
   getAllIdsAndNames,
   getOne,
   getByName,
+  getByIngredient,
   getByParams,
   create,
   update,

@@ -14,12 +14,15 @@ import {
   nextSeveralCosmetics,
   findCosmetic,
   findCosmeticByName,
+  findCosmeticByIngredient,
+  setSearchedIngredientName,
   //clearSelectedIngredient,
 } from "../reducers/cosmeticReducer";
 import cosmetic from "../services/cosmetic";
 
 const Products = () => {
-  const [searchName, setSearchName] = useState("");
+  const [searchCosmeticName, setSearchCosmeticName] = useState("");
+  // const [searchIngredientName, setSearchIngredientName] = useState("");
 
   const dispatch = useDispatch();
   const cosmeticIndexCounter = useSelector(
@@ -28,7 +31,9 @@ const Products = () => {
   const currentCosmetics = useSelector(
     (state) => state.cosmetic.currentCosmetic
   );
-
+  const searchedIngredientName = useSelector(
+    (state) => state.cosmetic.searchedIngredientName
+  );
   useEffect(() => {
     dispatch(initializeCosmetics());
   }, [dispatch]);
@@ -47,8 +52,8 @@ const Products = () => {
   };
 
   // handle searchbox text changes
-  const handleSearchBoxChange = async (e) => {
-    setSearchName(e.target.value);
+  const handleSearchCosmeticBoxChange = async (e) => {
+    setSearchCosmeticName(e.target.value);
     e.preventDefault();
 
     dispatch(findCosmeticByName(e.target.value));
@@ -63,21 +68,38 @@ const Products = () => {
     }*/
   };
 
+  const handleSearchIngredientBoxChange = async (e) => {
+    dispatch(setSearchedIngredientName(e.target.value));
+    e.preventDefault();
+    dispatch(findCosmeticByIngredient(e.target.value));
+  };
+
   return (
     <div>
       <div className="search-bar">
         <label>
           <input
             type="text"
-            placeholder=" Search "
+            placeholder=" Search Cosmetic "
             className="search-field"
-            value={searchName}
-            onChange={(event) => handleSearchBoxChange(event)}
+            value={searchCosmeticName}
+            onChange={(event) => handleSearchCosmeticBoxChange(event)}
           ></input>
         </label>
         <i className="gg-search"></i>
       </div>
-
+      <div className="search-bar">
+        <label>
+          <input
+            type="text"
+            placeholder=" Search Ingredient "
+            className="search-field"
+            value={searchedIngredientName ? searchedIngredientName : ""}
+            onChange={(event) => handleSearchIngredientBoxChange(event)}
+          ></input>
+        </label>
+        <i className="gg-search"></i>
+      </div>
       <div className="cosmetic-wrapper">
         {currentCosmetics ? (
           currentCosmetics.map((cosmetic, index) => (
