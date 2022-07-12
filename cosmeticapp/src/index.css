@@ -51,9 +51,9 @@
   justify-content: center;
   /* align-content: center; */
   /* grid-template-columns: repeat(4, auto); */
-  grid-template-columns: repeat(4, 420px);
+  grid-template-columns: repeat(4, auto);
   /* grid-row-gap: 5%; */
-  /* gap: 1.5em 1em; */
+  gap: 1.5em 1em;
   /* align-content: center;
   /* position:center; */
   /* padding: 20px ; */
