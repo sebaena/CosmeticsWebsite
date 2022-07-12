@@ -86,7 +86,11 @@ export const initializeCosmetics = () => {
     const init_cosmetic = {
       allCosmeticIdsAndNames: all_cosmetic_ids_names,
       currentCosmetic: [first_cosmetic],
-      indexCounter: 0,
+      selectedIngredient: {},
+      selectedCosmeticIndex: -1,
+      searchedCosmeticName: "",
+      searchedIngredientName: "",
+      indexCounter: 0,  
     };
 
     dispatch(initalCosmetics(init_cosmetic));
@@ -182,6 +186,7 @@ export const nextSeveralCosmetics = (n) => {
 // };
 
 export const updateSelectedIngredient = (ingredient_name) => {
+  console.log(ingredient_name);
   if (ingredient_name == "") {
     return async (dispatch) => {
       dispatch(setSelectedIngredient({}));
@@ -191,6 +196,7 @@ export const updateSelectedIngredient = (ingredient_name) => {
     const updated_ingredients = await ingredientService.getByQuery(
       ingredient_name
     );
+    console.log(updated_ingredients);
     if (updated_ingredients.length) {
       dispatch(setSelectedIngredient(updated_ingredients[0]));
     }
