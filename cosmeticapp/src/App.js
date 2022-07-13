@@ -1,7 +1,7 @@
 import Login from "./components/Login";
 import Products from "./components/Products";
 import Home from "./components/Home";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, HashRouter} from "react-router-dom";
 
 function App() {
   // const padding = {
@@ -9,7 +9,7 @@ function App() {
   // }
 
   return (
-    <Router>
+    <HashRouter>
       <nav className="navbar">
         <div className="navbar-menu">
           <Link className="navbar-link" to="/">
@@ -31,7 +31,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/signin" element={<Login />} />
       </Routes>
-    </Router>
+    </HashRouter>
   );
 }
 
