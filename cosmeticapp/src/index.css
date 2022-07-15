@@ -1,7 +1,6 @@
-
 * {
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -10,12 +9,11 @@
   display: flex;
   background-color: rgb(26, 5, 144);
   text-align: center;
-  
 }
 
-.navbar-menu{
+.navbar-menu {
   display: grid;
-  grid-template-columns: repeat(3, auto); 
+  grid-template-columns: repeat(3, auto);
   grid-gap: 10px;
   list-style: none;
   text-align: center;
@@ -26,12 +24,11 @@
   align-content: space-evenly;
   width: 100vw;
   height: 4rem;
-  background-color:rgb(26, 5, 144);
+  background-color: rgb(26, 5, 144);
   font-size: 1rem;
-
 }
 
-.navbar-link{
+.navbar-link {
   color: white;
   padding: 0.5rem 1rem;
   font-weight: bold;
@@ -39,14 +36,13 @@
   border-radius: 10px;
 }
 
-.navbar-link:hover{
+.navbar-link:hover {
   background-color: rgba(47, 16, 221, 0.999);
   border-radius: 10px;
-  transition: all 0.2s ease-out ;
+  transition: all 0.2s ease-out;
 }
 
-
-.cosmetic-wrapper{
+.cosmetic-wrapper {
   display: grid;
   justify-content: center;
   /* align-content: center; */
@@ -58,15 +54,14 @@
   /* position:center; */
   /* padding: 20px ; */
   /* margin: 30px 15px 30px 15px;  */
-
 }
 
-.cosmetic{
+.cosmetic {
   text-align: center;
   align-content: center;
-  display:flex;
+  display: flex;
   flex-direction: column;
-  padding: 20px ;
+  padding: 20px;
   margin: 0 auto;
   margin-top: 50px;
   max-width: 400px;
@@ -77,15 +72,13 @@
   transition: 0.3s ease-in-out;
 }
 
-
-.cosmetic-title{
+.cosmetic-title {
   font-weight: bold;
   font-size: large;
   color: rgb(26, 5, 144);
 }
 
-
-.search-bar{
+.search-bar {
   color: rgb(26, 5, 144);
   width: 100%;
   margin-top: 20px;
@@ -103,13 +96,13 @@
   box-sizing: border-box;
   position: relative;
   display: block;
-  transform: scale(var(--ggs,1));
+  transform: scale(var(--ggs, 1));
   width: 16px;
   height: 16px;
   border: 2px solid;
   border-radius: 100%;
   margin-left: -33px;
-  margin-top: -4px
+  margin-top: -4px;
 }
 
 .search-field {
@@ -117,12 +110,10 @@
   width: 100%;
   padding: 10px 35px 10px 15px;
   border: none;
-  border-radius: 200px; 
+  border-radius: 200px;
   outline: none;
   box-shadow: 0 1px 5px rgb(26, 5, 144);
 }
-
-
 
 .button-wrapper {
   display: block;
@@ -131,7 +122,7 @@
   /* z-index: 2; */
 }
 
-.button{
+.button {
   margin: 0 auto;
   display: block;
   width: 200px;
@@ -145,11 +136,11 @@
   letter-spacing: 2px;
   text-align: center;
   position: relative;
-  transition: all .5s;
+  transition: all 0.5s;
   background: rgb(26, 5, 144);
 }
 
-.button:after{
+.button:after {
   border-radius: 4rem;
   position: absolute;
   content: "";
@@ -157,28 +148,28 @@
   left: 0;
   width: 0;
   height: 100%;
-  transition: all .35s;
+  transition: all 0.35s;
   background: white;
   color: black;
 }
 
-.button:hover{
+.button:hover {
   cursor: pointer;
   /* background: white;
   color: rgb(26, 5, 144); */
 }
 
-.button:hover:after{
+.button:hover:after {
   color: rgb(26, 5, 144);
   /* content: "More Items"; */
   width: 100%;
 }
 
-.ingredients-wrapper{
+.ingredients-wrapper {
   margin: 0 auto;
-} 
+}
 
-.button-ingredient{
+.button-ingredient {
   background-color: #eee;
   color: #444;
   cursor: pointer;
@@ -189,23 +180,21 @@
   outline: none;
   font-size: 17px;
 }
-.button-ingredient-highlight{
+.button-ingredient-highlight {
   background-color: yellow;
 }
-.active, .button-ingredient:hover {
+.active,
+.button-ingredient:hover {
   background-color: #ccc;
 }
 
 .sample-content {
   padding: 0 18px;
   font-size: 12px;
- 
+
   /* background-color: #f1f1f1; */
   background-color: white;
 }
-
-
-
 
 /* Home screen styles */
 
@@ -247,5 +236,23 @@
     letter-spacing: 8px;
     margin-bottom: -40px;
   }
- 
+}
+
+.login-page-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem 2rem;
+  box-shadow: 0 1px 5px rgb(26, 5, 144);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form-label{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
 }

@@ -1,18 +1,14 @@
-
 import { useState, useEffect } from "react";
 import cosmeticService from "../services/cosmetic";
 import loginService from "../services/login";
 
-  const Login = () => {
+const Login = () => {
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
 
-    const [errorMessage, setErrorMessage] = useState(null);
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [user, setUser] = useState(null);
-
-
-    useEffect(() => {
-
+  useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem(
       "cosmeticAppLoggedInUser"
     );
@@ -53,48 +49,56 @@ import loginService from "../services/login";
 
   const loginForm = () => {
     return (
-      <form onSubmit={handleLogin}>
-        <div>
-          username
-          <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
+      <div>
+        <div className="login-form-label">
+          <h2>Log in</h2>
         </div>
-        <div>
-          password
-          <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
+        <div className="login-form-label">
+          {errorMessage ? (
+            <p style={{ color: "red" }}>{errorMessage}</p>
+          ) : (
+            <></>
+          )}
         </div>
-        <button type="submit">login</button>
-      </form>
+        <form onSubmit={handleLogin}>
+          <div>
+            <div>username</div>
+            <input
+              type="text"
+              value={username}
+              name="Username"
+              onChange={({ target }) => setUsername(target.value)}
+            />
+            <div>password</div>
+            <input
+              type="password"
+              value={password}
+              name="Password"
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </div>
+          <button type="submit">login</button>
+        </form>
+      </div>
     );
   };
 
   const loggedIn = () => {
     return (
       <div>
-        User: {username} is logged in
+        <div className="login-form-label">
+          User: <strong>{user.username}</strong> is logged in
+        </div>
         <button onClick={handleLogout}>Log out</button>
       </div>
     );
   };
 
-return (
-    <div>
-        <p> LOGIN FORM </p>
+  return (
+    <div className="login-page-container">
+      {user ? loggedIn() : loginForm()}
     </div>
-)
+  );
+};
 
-
-    
-  }
-
-
-  export default Login;
+export default Login;
