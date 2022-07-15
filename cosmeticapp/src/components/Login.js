@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
 import cosmeticService from "../services/cosmetic";
 import loginService from "../services/login";
+import { useCookies } from "react-cookie";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
+  const [cookies, setCookie, removeCookie] = useCookies(["cosmeticAppLoggedInUser"]);
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem(
-      "cosmeticAppLoggedInUser"
-    );
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
+    // const loggedUserJSON = window.localStorage.getItem(
+    //   "cosmeticAppLoggedInUser"
+    // );
+    if (cookies.cosmeticAppLoggedInUser) {
+      const user = JSON.parse(cookies.cosmeticAppLoggedInUser);
       setUser(user);
       cosmeticService.setToken(user.token);
     }
@@ -26,10 +28,11 @@ const Login = () => {
     try {
       const user = await loginService.login({ username, password });
       setUser(user);
-      window.localStorage.setItem(
-        "cosmeticAppLoggedInUser",
-        JSON.stringify(user)
-      );
+      // window.localStorage.setItem(
+      //   "cosmeticAppLoggedInUser",
+      //   JSON.stringify(user)
+      // );
+      setCookie("cosmeticAppLoggedInUser", JSON.stringify(user), { path: "/" });
       cosmeticService.setToken(user.token);
       setUsername("");
       setPassword("");
@@ -42,7 +45,8 @@ const Login = () => {
   };
 
   const handleLogout = (event) => {
-    window.localStorage.removeItem("cosmeticAppLoggedInUser");
+    // window.localStorage.removeItem("cosmeticAppLoggedInUser");
+    removeCookie("cosmeticAppLoggedInUser", { path: "/" });
     setUser(null);
     cosmeticService.setToken("");
   };
