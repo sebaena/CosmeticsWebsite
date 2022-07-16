@@ -1,12 +1,18 @@
 import Login from "./components/Login";
 import Products from "./components/Products";
 import Home from "./components/Home";
-import { BrowserRouter as Router, Routes, Route, Link, HashRouter} from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  HashRouter,
+} from "react-router-dom";
+import { useSelector } from "react-redux";
+import { FaUserAlt } from "react-icons/fa";
 
 function App() {
-  // const padding = {
-  //   padding: 5
-  // }
+  const user = useSelector((state) => state.user.user);
 
   return (
     <HashRouter>
@@ -22,7 +28,11 @@ function App() {
           </Link>
           <Link className="navbar-link" to="/signin">
             {" "}
-            Sign in{" "}
+            <p>
+              {user && user.token ? <FaUserAlt /> : <></>}
+              {user && user.token ? user.username : <></>}
+            </p>
+            {user && user.token ? "Online" : "Login"}{" "}
           </Link>
         </div>
       </nav>
