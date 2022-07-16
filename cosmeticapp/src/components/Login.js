@@ -78,7 +78,7 @@ const Login = () => {
             User: <strong>{user.username}</strong>
           </div>
           <div style={{ marginBottom: "0.5rem", color: "green" }}>
-            statue: is logged in
+            status: is logged in
           </div>
           <button className="login-form-button" onClick={handleLogout}>Log out</button>
         </div>
