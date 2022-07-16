@@ -3,7 +3,7 @@ import cosmeticService from "../services/cosmetic";
 import ingredientService from "../services/ingredient";
 
 const cosmeticSlice = createSlice({
-  name: "cosmetics",
+  name: "cosmetic",
   initialState: {
     allCosmeticIdsAndNames: [],
     currentCosmetic: [],

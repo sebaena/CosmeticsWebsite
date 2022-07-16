@@ -1,54 +1,33 @@
-import { useState, useEffect } from "react";
-import cosmeticService from "../services/cosmetic";
-import loginService from "../services/login";
-import { useCookies } from "react-cookie";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+
+import {
+  setUsername,
+  setPassword,
+  userLogin,
+  userLogout,
+  UserInit,
+} from "../reducers/userReducer";
 
 const Login = () => {
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
-  const [cookies, setCookie, removeCookie] = useCookies(["cosmeticAppLoggedInUser"]);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
+  const username = useSelector((state) => state.user.username);
+  const password = useSelector((state) => state.user.password);
+  const errorMessage = useSelector((state) => state.user.errorMessage);
 
   useEffect(() => {
-    // const loggedUserJSON = window.localStorage.getItem(
-    //   "cosmeticAppLoggedInUser"
-    // );
-    if (cookies.cosmeticAppLoggedInUser) {
-      const user = JSON.parse(cookies.cosmeticAppLoggedInUser);
-      setUser(user);
-      cosmeticService.setToken(user.token);
-    }
+    dispatch(UserInit());
   }, []);
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    console.log("login in with ", username);
-
-    try {
-      const user = await loginService.login({ username, password });
-      setUser(user);
-      // window.localStorage.setItem(
-      //   "cosmeticAppLoggedInUser",
-      //   JSON.stringify(user)
-      // );
-      setCookie("cosmeticAppLoggedInUser", JSON.stringify(user), { path: "/" });
-      cosmeticService.setToken(user.token);
-      setUsername("");
-      setPassword("");
-    } catch (exception) {
-      setErrorMessage("Wrong credientials");
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 5000);
-    }
+    dispatch(userLogin());
   };
 
   const handleLogout = (event) => {
-    // window.localStorage.removeItem("cosmeticAppLoggedInUser");
-    removeCookie("cosmeticAppLoggedInUser", { path: "/" });
-    setUser(null);
-    cosmeticService.setToken("");
+    dispatch(userLogout());
   };
 
   const loginForm = () => {
@@ -66,22 +45,26 @@ const Login = () => {
         </div>
         <form onSubmit={handleLogin}>
           <div>
-            <div>username</div>
+            <div style={{ marginBottom: "0.5rem" }}>username</div>
             <input
+              className="login-form-input"
               type="text"
               value={username}
               name="Username"
-              onChange={({ target }) => setUsername(target.value)}
+              onChange={({ target }) => dispatch(setUsername(target.value))}
             />
-            <div>password</div>
+            <div style={{ marginBottom: "0.5rem" }}>password</div>
             <input
+              className="login-form-input"
               type="password"
               value={password}
               name="Password"
-              onChange={({ target }) => setPassword(target.value)}
+              onChange={({ target }) => dispatch(setPassword(target.value))}
             />
           </div>
-          <button type="submit">login</button>
+          <button className="login-form-button" type="submit">
+            login
+          </button>
         </form>
       </div>
     );
@@ -91,16 +74,21 @@ const Login = () => {
     return (
       <div>
         <div className="login-form-label">
-          User: <strong>{user.username}</strong> is logged in
+          <div style={{ marginBottom: "1rem" }}>
+            User: <strong>{user.username}</strong>
+          </div>
+          <div style={{ marginBottom: "0.5rem", color: "green" }}>
+            statue: is logged in
+          </div>
+          <button className="login-form-button" onClick={handleLogout}>Log out</button>
         </div>
-        <button onClick={handleLogout}>Log out</button>
       </div>
     );
   };
 
   return (
     <div className="login-page-container">
-      {user ? loggedIn() : loginForm()}
+      {user && user.token ? loggedIn() : loginForm()}
     </div>
   );
 };
