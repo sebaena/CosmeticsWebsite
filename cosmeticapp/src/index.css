@@ -41,6 +41,12 @@
   transition: all 0.2s ease-out;
 }
 
+.navbar-selection {
+  background-color: var(--color-base);
+  color: white;
+  font-size: 1rem;
+}
+
 .cosmetic-wrapper {
   display: grid;
   justify-content: center;
@@ -120,7 +126,11 @@
   text-align: center;
   position: relative;
   transition: all 0.5s;
-  background: rgb(26, 5, 144);
+  background: var(--color-base);
+}
+
+.button:hover {
+  cursor: pointer;
 }
 
 .ingredients-wrapper {
@@ -205,7 +215,7 @@
   flex-direction: column;
 }
 
-.login-form-label{
+.login-form-label {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -213,14 +223,14 @@
   margin-bottom: 10px;
 }
 
-.login-form-input{
+.login-form-input {
   border: 0.1rem solid var(--color-base);
   border-radius: 0.3rem;
   font-size: 1rem;
   margin-bottom: 1rem;
 }
 
-.login-form-button{
+.login-form-button {
   border: 0.1rem solid var(--color-base);
   border-radius: 0.3rem;
   width: 100%;

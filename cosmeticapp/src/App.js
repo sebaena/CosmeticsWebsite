@@ -27,12 +27,43 @@ html {
 }
 `;
 
+const GlobalStyleTheme3 = createGlobalStyle`
+html {
+  --color-base: rgb(9, 132, 227);
+  --color-clicked: rgba(9, 132, 227, 0.999);
+}
+`;
+
+const GlobalStyleTheme4 = createGlobalStyle`
+html {
+  --color-base: rgb(255, 118, 117);
+  --color-clicked: rgba(255, 118, 117, 0.999);
+}
+`;
+
+const GlobalStyleTheme5 = createGlobalStyle`
+html {
+  --color-base: rgb(99, 110, 114);
+  --color-clicked: rgba(99, 110, 114, 0.999);
+}
+`;
+
+const GlobalStyleTheme6 = createGlobalStyle`
+html {
+  --color-base:rgb(45, 52, 54);
+  --color-clicked: rgba(45 , 52, 54, 0.999);
+}`;
+
 function App() {
   const [theme, setTheme] = useState("theme1");
   const user = useSelector((state) => state.user.user);
   const themeOptions = [
-    { value: "theme1", label: "Purple Theme" },
-    { value: "theme2", label: "Green Theme" },
+    { value: "theme1", label: "Theme purple" },
+    { value: "theme2", label: "Theme green" },
+    { value: "theme3", label: "Theme blue" },
+    { value: "theme4", label: "Theme pink" },
+    { value: "theme5", label: "Theme grey" },
+    { value: "theme6", label: "Theme black" },
   ];
 
   const selectedTheme = () => {
@@ -41,6 +72,14 @@ function App() {
         return <GlobalStyleTheme1 />;
       case "theme2":
         return <GlobalStyleTheme2 />;
+      case "theme3":
+        return <GlobalStyleTheme3 />;
+      case "theme4":
+        return <GlobalStyleTheme4 />;
+      case "theme5":
+        return <GlobalStyleTheme5 />;
+      case "theme6":
+        return <GlobalStyleTheme6 />;
       default:
         return <GlobalStyleTheme1 />;
     }
@@ -72,7 +111,7 @@ function App() {
             {user && user.token ? "Online" : "Login"}{" "}
           </Link>
         </div>
-        <select onChange={handleThemeChange}>
+        <select className="navbar-selection" onChange={handleThemeChange}>
           {themeOptions.map((themeOption) => (
             <option key={themeOption.value} value={themeOption.value}>
               {themeOption.label}
