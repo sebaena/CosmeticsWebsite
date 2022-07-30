@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poiret One", cursive;
   padding: 0;
   margin: 0;
 }
@@ -78,11 +78,11 @@
   transition: all 0.2s ease-out;
 } */
 
-/* .navbar-selection {
+.navbar-selection {
   background-color: var(--color-base);
   color: white;
   font-size: 1rem;
-} */
+}
 
 .cosmetic-wrapper {
   display: grid;
