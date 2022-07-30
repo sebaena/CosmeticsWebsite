@@ -22,7 +22,8 @@ const GlobalStyleTheme1 = createGlobalStyle`
 
 const GlobalStyleTheme2 = createGlobalStyle`
 html {
-  --color-base: rgb(0, 184, 148);
+  // --color-base: rgb(0, 184, 148);
+  --color-base: rgb(139, 222, 212);
   --color-clicked: rgba(0, 184, 148, 0.999);
 }
 `;
@@ -96,13 +97,14 @@ function App() {
         <div className="navbar-menu">
           <Link className="navbar-link" to="/">
             {" "}
-            Home{" "}
+            <img src={"favicon.ico"} />
+            {" "}
           </Link>
           <Link className="navbar-link" to="/products">
             {" "}
             Products{" "}
           </Link>
-          <Link className="navbar-link" to="/signin">
+          <Link className="navbar-link-signin" to="/signin">
             {" "}
             <p>
               {user && user.token ? <FaUserAlt /> : <></>}
