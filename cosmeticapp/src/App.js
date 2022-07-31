@@ -96,13 +96,11 @@ function App() {
       <nav className="navbar">
         <div className="navbar-menu">
           <Link className="navbar-link" to="/">
-            {" "}
             <img src={"favicon.ico"} />
-            {" "}
           </Link>
           <Link className="navbar-link" to="/products">
-            {" "}
-            Products{" "}
+            
+            Products
           </Link>
           <Link className="navbar-link-signin" to="/signin">
             {" "}
@@ -110,7 +108,7 @@ function App() {
               {user && user.token ? <FaUserAlt /> : <></>}
               {user && user.token ? user.username : <></>}
             </p>
-            {user && user.token ? "Online" : "Login"}{" "}
+            {user && user.token ? " " : "Login"}
           </Link>
         </div>
         <select className="navbar-selection" onChange={handleThemeChange}>

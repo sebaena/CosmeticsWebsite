@@ -91,6 +91,15 @@ const Products = () => {
       </div>
       {/* display cosmetic components */}
       <div className="cosmetic-wrapper">
+      <div className="product-menu">
+          <i className="product-options">Yibo is a noob</i>
+          {/* <i className="product-options">truth hurts</i> */}
+{/*           
+        <div className="product-options">
+
+        </div> */}
+
+        </div>
         {currentCosmetics ? (
           currentCosmetics.map((cosmetic, index) => (
             <Cosmetic key={index} idx={index} cosmetic={cosmetic} />
