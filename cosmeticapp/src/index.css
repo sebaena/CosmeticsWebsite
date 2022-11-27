@@ -47,7 +47,7 @@
   padding: 0.5rem 1rem;
   /* font-weight: bold; */
   text-decoration: none;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 
@@ -55,6 +55,14 @@
   width: 4.5rem;
   height: 4rem;
   /* border-radius: 1px; */
+}
+
+.navbar-link-product {
+  color: white;
+  /* padding: 0.5rem 1rem; */
+  /* font-weight: bold; */
+  text-decoration: none;
+  /* border-radius: 10px; */
 }
 
 .navbar-link-signin {
@@ -87,7 +95,8 @@
 .cosmetic-wrapper {
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(auto-fit, 400px);
+  /* grid-template-columns: repeat(auto-fit, 400px); */
+  /* grid-template-columns: repeat(3, 400px); */
   gap: 1.5em 1em;
 }
 

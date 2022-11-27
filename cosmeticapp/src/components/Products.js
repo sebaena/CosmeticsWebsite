@@ -91,15 +91,18 @@ const Products = () => {
       </div>
       {/* display cosmetic components */}
       <div className="cosmetic-wrapper">
-      <div className="product-menu">
-          <i className="product-options">Yibo is a noob</i>
+
+
+        {/* This is the product menu */}
+      {/* <div className="product-menu"> */}
+          {/* <i className="product-options">Yibo is a noob</i> */}
           {/* <i className="product-options">truth hurts</i> */}
 {/*           
         <div className="product-options">
 
         </div> */}
 
-        </div>
+        {/* </div> */}
         {currentCosmetics ? (
           currentCosmetics.map((cosmetic, index) => (
             <Cosmetic key={index} idx={index} cosmetic={cosmetic} />
@@ -109,16 +112,16 @@ const Products = () => {
         )}
       </div>
       {/* button to display more cosmetics */}
-      <div className="button-wrapper">
+      {/* <div className="button-wrapper">
         <button
           className="button"
           onClick={() => {
-            nextSeveralItemHandle(4);
+            nextSeveralItemHandle(3);
           }}
         >
           <span>More Items</span>
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

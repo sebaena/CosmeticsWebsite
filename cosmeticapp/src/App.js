@@ -56,7 +56,7 @@ html {
 }`;
 
 function App() {
-  const [theme, setTheme] = useState("theme1");
+  const [theme, setTheme] = useState("theme2");
   const user = useSelector((state) => state.user.user);
   const themeOptions = [
     { value: "theme1", label: "Theme purple" },
@@ -87,7 +87,8 @@ function App() {
   };
 
   const handleThemeChange = (event) => {
-    setTheme(event.target.value);
+    // setTheme(event.target.value);
+    setTheme("theme2");
   };
 
   return (
@@ -100,8 +101,9 @@ function App() {
           </Link>
           <Link className="navbar-link" to="/products">
             
-            Products
+            Search 
           </Link>
+          
           <Link className="navbar-link-signin" to="/signin">
             {" "}
             <p>
@@ -111,13 +113,15 @@ function App() {
             {user && user.token ? " " : "Login"}
           </Link>
         </div>
-        <select className="navbar-selection" onChange={handleThemeChange}>
+        {/* 
+          Theme picker menu
+          <select className="navbar-selection" onChange={handleThemeChange}>
           {themeOptions.map((themeOption) => (
             <option key={themeOption.value} value={themeOption.value}>
               {themeOption.label}
             </option>
           ))}
-        </select>
+        </select> */}
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
